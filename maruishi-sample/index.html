@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>まるいし薬局 | 丹波市山南町の調剤薬局</title>
+  <style>
+    /* ===== リセット・ベース ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+      color: #2c2c2c;
+      line-height: 1.8;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; }
+
+    /* ===== カラー変数 ===== */
+    :root {
+      --green-dark:  #1a6b3a;
+      --green-main:  #27ae60;
+      --green-light: #e8f5e9;
+      --green-mid:   #c8e6c9;
+      --white:       #ffffff;
+      --text-dark:   #2c2c2c;
+      --text-mid:    #555555;
+      --border:      #d0e8d0;
+    }
+
+    /* ===== ヘッダー ===== */
+    header {
+      background: var(--green-dark);
+      color: var(--white);
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 68px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-logo .logo-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .header-logo .logo-text {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+    }
+    .header-logo .logo-sub {
+      font-size: 0.72rem;
+      font-weight: 400;
+      opacity: 0.82;
+      display: block;
+    }
+    nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+    nav a {
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+    }
+    nav a:hover {
+      opacity: 1;
+      border-bottom-color: #7bdc9e;
+    }
+    .nav-tel {
+      background: var(--green-main);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      opacity: 1 !important;
+      border-bottom: none !important;
+    }
+    .nav-tel:hover { background: #219a52; }
+
+    /* ===== ハンバーガー（SP） ===== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ===== お知らせバー ===== */
+    .notice-bar {
+      background: var(--green-main);
+      color: var(--white);
+      padding: 8px 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      flex-wrap: wrap;
+    }
+    .notice-bar span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ===== ヒーロー ===== */
+    .hero {
+      background: linear-gradient(135deg, #1a6b3a 0%, #27ae60 55%, #52c07a 100%);
+      color: var(--white);
+      padding: 90px 40px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 260px; height: 260px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 20px;
+      padding: 4px 18px;
+      font-size: 0.82rem;
+      margin-bottom: 22px;
+      letter-spacing: 0.08em;
+    }
+    .hero h1 {
+      font-size: 2.0rem;
+      font-weight: 800;
+      line-height: 1.5;
+      margin-bottom: 18px;
+      letter-spacing: 0.03em;
+      position: relative;
+    }
+    .hero-sub {
+      font-size: 1.0rem;
+      opacity: 0.88;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+    .btn-primary {
+      background: var(--white);
+      color: var(--green-dark);
+      padding: 12px 32px;
+      border-radius: 26px;
+      font-weight: 700;
+      font-size: 0.97rem;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-primary:hover {
+      background: #f0faf4;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .btn-outline {
+      border: 2px solid var(--white);
+      color: var(--white);
+      padding: 12px 32px;
+      border-radius: 26px;
+      font-weight: 700;
+      font-size: 0.97rem;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-1px);
+    }
+
+    /* ===== セクション共通 ===== */
+    section { padding: 72px 40px; }
+    .section-inner { max-width: 960px; margin: 0 auto; }
+    .section-label {
+      display: inline-block;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 3px 14px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .section-desc {
+      color: var(--text-mid);
+      font-size: 0.95rem;
+      margin-bottom: 48px;
+    }
+
+    /* ===== 特徴カード ===== */
+    .features { background: var(--green-light); }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px 28px;
+      box-shadow: 0 2px 12px rgba(26,107,58,0.08);
+      border: 1px solid var(--border);
+      transition: 0.25s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(26,107,58,0.14);
+    }
+    .card-icon {
+      font-size: 2.6rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .card h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--green-dark);
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+    }
+
+    /* ===== 処方箋案内 ===== */
+    .prescription { background: var(--white); }
+    .rx-box {
+      background: var(--green-light);
+      border-radius: 16px;
+      padding: 40px 48px;
+      border: 2px solid var(--green-mid);
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .rx-item { flex: 1; min-width: 220px; }
+    .rx-item h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--green-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .rx-item p, .rx-item li {
+      font-size: 0.92rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+    }
+    .rx-item ul { padding-left: 18px; }
+    .rx-fax-number {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--green-dark);
+      letter-spacing: 0.04em;
+      margin: 8px 0;
+    }
+    .rx-note {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    /* ===== ギャラリー ===== */
+    .gallery { background: #fff; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(26,107,58,0.10);
+      aspect-ratio: 4/3;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-caption {
+      text-align: center;
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: #888;
+    }
+    @media (max-width: 680px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ===== 営業時間 ===== */
+    .hours { background: var(--green-light); }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(26,107,58,0.08);
+    }
+    .hours-table th {
+      background: var(--green-dark);
+      color: var(--white);
+      padding: 14px 20px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-align: left;
+    }
+    .hours-table td {
+      padding: 14px 20px;
+      border-bottom: 1px solid #e8f5e9;
+      vertical-align: middle;
+    }
+    .hours-table tr:last-child td { border-bottom: none; }
+    .hours-table tr:nth-child(even) td { background: #f4fbf5; }
+    .tag-open {
+      background: var(--green-main);
+      color: var(--white);
+      padding: 2px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .tag-closed {
+      background: #e0e0e0;
+      color: #888;
+      padding: 2px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .hours-note {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      padding: 12px 16px;
+      background: var(--white);
+      border-radius: 8px;
+      border-left: 4px solid var(--green-main);
+    }
+
+    /* ===== アクセス ===== */
+    .access { background: var(--white); }
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .access-info { display: flex; flex-direction: column; gap: 20px; }
+    .access-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .access-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .access-item h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+    }
+    .access-item p {
+      font-size: 0.95rem;
+      color: var(--text-dark);
+    }
+    .access-item a { color: var(--green-dark); font-weight: 700; }
+    .access-item a:hover { text-decoration: underline; }
+    .access-map {
+      background: var(--green-light);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid var(--green-mid);
+      height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--text-mid);
+    }
+    .access-map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .map-placeholder {
+      text-align: center;
+      padding: 32px;
+    }
+    .map-placeholder .map-icon { font-size: 2.5rem; margin-bottom: 10px; }
+    .map-placeholder p { font-size: 0.9rem; color: var(--text-mid); }
+    .map-placeholder a {
+      display: inline-block;
+      margin-top: 14px;
+      background: var(--green-dark);
+      color: var(--white);
+      padding: 8px 22px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+    .map-placeholder a:hover { background: #155a30; }
+
+    /* ===== 2店舗バナー ===== */
+    .shops { background: var(--green-dark); color: var(--white); padding: 60px 40px; }
+    .shop-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 800px;
+      margin: 32px auto 0;
+    }
+    .shop-card {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 14px;
+      padding: 28px 28px;
+    }
+    .shop-card h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .shop-current {
+      background: var(--green-main);
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-size: 0.72rem;
+    }
+    .shop-card p {
+      font-size: 0.88rem;
+      opacity: 0.85;
+      line-height: 1.75;
+    }
+
+    /* ===== フッター ===== */
+    footer {
+      background: #0f3d22;
+      color: rgba(255,255,255,0.75);
+      padding: 40px 40px 24px;
+    }
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      flex-wrap: wrap;
+    }
+    .footer-brand .logo-text {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-brand p {
+      font-size: 0.82rem;
+      line-height: 1.7;
+    }
+    .footer-links {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .footer-col h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+      letter-spacing: 0.06em;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 6px; }
+    .footer-col a {
+      font-size: 0.83rem;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+    .footer-col a:hover { opacity: 1; }
+    .footer-copy {
+      text-align: center;
+      padding-top: 22px;
+      font-size: 0.8rem;
+    }
+
+    /* ===== スクロールアンカー補正 ===== */
+    :target { scroll-margin-top: 80px; }
+
+    /* ===== レスポンシブ（タブレット〜） ===== */
+    @media (max-width: 900px) {
+      .card-grid { grid-template-columns: 1fr 1fr; }
+      .access-grid { grid-template-columns: 1fr; }
+      .shop-grid { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; }
+    }
+
+    /* ===== レスポンシブ（スマートフォン） ===== */
+    @media (max-width: 620px) {
+      header { padding: 0 20px; height: 60px; }
+      nav { display: none; }
+      nav.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 60px; left: 0; right: 0;
+        background: var(--green-dark);
+        padding: 20px 24px 28px;
+        gap: 16px;
+        z-index: 99;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      }
+      nav.open a { font-size: 1.0rem; }
+      .hamburger { display: flex; }
+
+      .notice-bar { padding: 8px 16px; gap: 14px; font-size: 0.8rem; }
+
+      .hero { padding: 60px 20px 52px; }
+      .hero h1 { font-size: 1.45rem; }
+
+      section { padding: 52px 20px; }
+      .section-title { font-size: 1.3rem; }
+
+      .card-grid { grid-template-columns: 1fr; gap: 16px; }
+
+      .rx-box { padding: 28px 24px; gap: 28px; flex-direction: column; }
+      .rx-fax-number { font-size: 1.3rem; }
+
+      .hours-table th, .hours-table td { padding: 10px 14px; font-size: 0.88rem; }
+
+      .shops { padding: 48px 20px; }
+      .footer-links { gap: 24px; }
+      footer { padding: 32px 20px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== ヘッダー ===== -->
+  <header>
+    <div class="header-logo">
+      <span class="logo-icon">💊</span>
+      <div class="logo-text">
+        まるいし薬局
+        <span class="logo-sub">有限会社まるいし薬局</span>
+      </div>
+    </div>
+    <nav id="global-nav">
+      <a href="#top">TOP</a>
+      <a href="#features">当薬局について</a>
+      <a href="#prescription">処方箋</a>
+      <a href="#hours">営業時間</a>
+      <a href="#access">アクセス</a>
+      <a href="tel:0795760104" class="nav-tel">📞 0795-76-0104</a>
+    </nav>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <!-- ===== お知らせバー ===== -->
+  <div class="notice-bar" id="top">
+    <span>🟢 処方箋受付中</span>
+    <span>🅿️ 駐車場あり（4台・無料）</span>
+    <span>📅 月〜土 営業</span>
+    <span>📠 FAXで事前送信OK</span>
+  </div>
+
+  <!-- ===== ヒーロー ===== -->
+  <div class="hero">
+    <div class="hero-badge">丹波市山南町 ・ 地域密着の調剤薬局</div>
+    <h1>山南町で40年以上、<br>地域に寄り添う薬局です</h1>
+    <p class="hero-sub">
+      和田店・谷川店の2店舗で、皆さまのお薬と健康をしっかりサポートします。<br>
+      気になることがあれば、いつでもお気軽にご相談ください。
+    </p>
+    <div class="hero-actions">
+      <a href="#prescription" class="btn-primary">📠 処方箋をFAXで送る</a>
+      <a href="#access" class="btn-outline">🗺️ アクセスを確認する</a>
+    </div>
+  </div>
+
+  <!-- ===== 特徴カード ===== -->
+  <section class="features" id="features">
+    <div class="section-inner">
+      <span class="section-label">FEATURES</span>
+      <h2 class="section-title">まるいし薬局の3つの特徴</h2>
+      <p class="section-desc">地域のかかりつけ薬局として、安心・丁寧なサービスをご提供しています。</p>
+      <div class="card-grid">
+        <div class="card">
+          <span class="card-icon">🏘️</span>
+          <h3>地域密着の2店舗</h3>
+          <p>山南町和田・谷川の2店舗を構え、地域の皆さまの健康を長年にわたって支えています。地元に根ざした薬局として、地域全体を面でサポートします。</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">💬</span>
+          <h3>丁寧でわかりやすい説明</h3>
+          <p>お薬の飲み方・副作用・飲み合わせなどを、わかりやすい言葉でご説明します。ご不明な点はどんなことでも遠慮なくお申しつけください。</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">📠</span>
+          <h3>処方箋の事前受付</h3>
+          <p>FAXやネットで処方箋を事前送信いただくと、来局時のお待ち時間を短縮できます。お仕事や通院でお忙しい方もスムーズにお薬を受け取れます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ギャラリー ===== -->
+  <section class="gallery" id="gallery">
+    <div class="section-inner">
+      <span class="section-label">GALLERY</span>
+      <h2 class="section-title">店舗のご紹介</h2>
+      <p class="section-desc">清潔で落ち着いた空間で、丁寧にお薬のご説明をいたします。</p>
+      <div class="gallery-grid">
+        <div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=800&q=80" alt="薬局外観" loading="lazy">
+          </div>
+          <p class="gallery-caption">店舗外観</p>
+        </div>
+        <div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1576671081837-49000212a370?w=800&q=80" alt="薬局内部" loading="lazy">
+          </div>
+          <p class="gallery-caption">調剤室・カウンター</p>
+        </div>
+        <div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=800&q=80" alt="薬のご説明" loading="lazy">
+          </div>
+          <p class="gallery-caption">お薬のご相談</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 処方箋案内 ===== -->
+  <section class="prescription" id="prescription">
+    <div class="section-inner">
+      <span class="section-label">PRESCRIPTION</span>
+      <h2 class="section-title">処方箋のお取扱い</h2>
+      <p class="section-desc">来局前に処方箋をお送りいただくと、お待ち時間を大幅に短縮できます。</p>
+
+      <div class="rx-box">
+        <div class="rx-item">
+          <h3>📠 FAX番号（和田店）</h3>
+          <div class="rx-fax-number">0795-76-XXXX</div>
+          <p class="rx-note">※FAX番号は準備中です。店舗へお問い合わせください。</p>
+          <p style="margin-top:12px;">受付後、準備ができましたらご連絡いたします。<br>来局時はそのままお薬をお受け取りいただけます。</p>
+        </div>
+        <div class="rx-item">
+          <h3>📋 受付時間</h3>
+          <p>
+            平日：8:30 〜 18:30<br>
+            土曜：8:30 〜 12:30<br>
+            <br>
+            ※受付締め切り30分前までにお送りください。
+          </p>
+        </div>
+        <div class="rx-item">
+          <h3>📝 ご来局の流れ</h3>
+          <ul>
+            <li>処方箋をFAXで送信</li>
+            <li>薬局から準備完了の連絡</li>
+            <li>ご都合のよい時間に来局</li>
+            <li>お薬の受け取り・説明</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 営業時間 ===== -->
+  <section class="hours" id="hours">
+    <div class="section-inner">
+      <span class="section-label">HOURS</span>
+      <h2 class="section-title">営業時間</h2>
+      <p class="section-desc">和田店の営業時間です。</p>
+
+      <table class="hours-table">
+        <thead>
+          <tr>
+            <th>曜日</th>
+            <th>午前（8:30〜12:30）</th>
+            <th>午後（13:00〜18:30）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>月曜日</td>
+            <td><span class="tag-open">受付中</span></td>
+            <td><span class="tag-open">受付中</span></td>
+          </tr>
+          <tr>
+            <td>火曜日</td>
+            <td><span class="tag-open">受付中</span></td>
+            <td><span class="tag-open">受付中</span></td>
+          </tr>
+          <tr>
+            <td>水曜日</td>
+            <td><span class="tag-open">受付中</span></td>
+            <td><span class="tag-open">受付中</span></td>
+          </tr>
+          <tr>
+            <td>木曜日</td>
+            <td><span class="tag-open">受付中</span></td>
+            <td><span class="tag-open">受付中</span></td>
+          </tr>
+          <tr>
+            <td>金曜日</td>
+            <td><span class="tag-open">受付中</span></td>
+            <td><span class="tag-open">受付中</span></td>
+          </tr>
+          <tr>
+            <td>土曜日</td>
+            <td><span class="tag-open">受付中</span></td>
+            <td><span class="tag-closed">休業</span></td>
+          </tr>
+          <tr>
+            <td>日曜日・祝日</td>
+            <td><span class="tag-closed">定休日</span></td>
+            <td><span class="tag-closed">定休日</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="hours-note">
+        ※ 土曜日の午後・日曜日・祝日は定休日です。<br>
+        ※ 年末年始・お盆期間中は臨時休業となる場合があります。詳細はお電話にてご確認ください。
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== アクセス ===== -->
+  <section class="access" id="access">
+    <div class="section-inner">
+      <span class="section-label">ACCESS</span>
+      <h2 class="section-title">アクセス（和田店）</h2>
+      <p class="section-desc">お車でも路線バスでもお越しいただけます。</p>
+
+      <div class="access-grid">
+        <div class="access-info">
+          <div class="access-item">
+            <span class="access-icon">📍</span>
+            <div>
+              <h4>住所</h4>
+              <p>〒669-3157<br>兵庫県丹波市山南町和田282</p>
+            </div>
+          </div>
+          <div class="access-item">
+            <span class="access-icon">📞</span>
+            <div>
+              <h4>電話番号</h4>
+              <p><a href="tel:0795760104">0795-76-0104</a></p>
+            </div>
+          </div>
+          <div class="access-item">
+            <span class="access-icon">🚌</span>
+            <div>
+              <h4>バスをご利用の方</h4>
+              <p>「和田上町」バス停 前</p>
+            </div>
+          </div>
+          <div class="access-item">
+            <span class="access-icon">🅿️</span>
+            <div>
+              <h4>お車でのご来局</h4>
+              <p>駐車場あり（無料・4台）</p>
+            </div>
+          </div>
+          <div class="access-item">
+            <span class="access-icon">🕐</span>
+            <div>
+              <h4>営業時間</h4>
+              <p>平日 8:30〜18:30 ／ 土曜 8:30〜12:30<br>日曜・祝日 定休</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="access-map">
+          <div class="map-placeholder">
+            <div class="map-icon">🗺️</div>
+            <p>〒669-3157<br>兵庫県丹波市山南町和田282</p>
+            <a href="https://maps.google.com/maps?q=兵庫県丹波市山南町和田282" target="_blank" rel="noopener">
+              Google マップで開く
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2店舗紹介 ===== -->
+  <section class="shops">
+    <div class="section-inner" style="text-align:center;">
+      <span class="section-label" style="background:rgba(255,255,255,0.15); color:#fff;">OUR SHOPS</span>
+      <h2 class="section-title" style="color:#fff; margin-top:8px;">山南町に2店舗を展開</h2>
+      <p style="color:rgba(255,255,255,0.78); font-size:0.95rem;">お近くの店舗をご利用ください。</p>
+      <div class="shop-grid">
+        <div class="shop-card">
+          <h3>🏪 和田店 <span class="shop-current">このページ</span></h3>
+          <p>
+            〒669-3157<br>
+            丹波市山南町和田282<br>
+            📞 0795-76-0104<br><br>
+            平日 8:30〜18:30<br>
+            土曜 8:30〜12:30
+          </p>
+        </div>
+        <div class="shop-card">
+          <h3>🏪 谷川店</h3>
+          <p>
+            丹波市山南町谷川エリア<br>
+            （詳細はお電話にてご確認ください）<br><br>
+            ※谷川店の詳細情報は<br>
+            準備中です。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== フッター ===== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-text">💊 まるいし薬局</div>
+          <p>
+            有限会社まるいし薬局<br>
+            〒669-3157 兵庫県丹波市山南町和田282<br>
+            TEL：0795-76-0104
+          </p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>メニュー</h4>
+            <ul>
+              <li><a href="#top">TOP</a></li>
+              <li><a href="#features">当薬局について</a></li>
+              <li><a href="#prescription">処方箋のご案内</a></li>
+              <li><a href="#hours">営業時間</a></li>
+              <li><a href="#access">アクセス</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>店舗情報</h4>
+            <ul>
+              <li><a href="#access">和田店</a></li>
+              <li><a href="#top">谷川店（準備中）</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="footer-copy">© 2025 まるいし薬局（有限会社まるいし薬局）All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== ハンバーガーメニュー JS ===== -->
+  <script>
+    function toggleNav() {
+      const nav = document.getElementById('global-nav');
+      nav.classList.toggle('open');
+    }
+    // ナビリンクをクリックしたらメニューを閉じる
+    document.querySelectorAll('#global-nav a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        document.getElementById('global-nav').classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

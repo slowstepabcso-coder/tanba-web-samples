@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ファイン調剤薬局｜トクオカ薬局グループ｜丹波市山南町</title>
+  <meta name="description" content="ファイン調剤薬局（トクオカ薬局グループ）は兵庫県丹波市山南町谷川にある調剤薬局です。処方箋ネット受付対応・無料駐車場16台完備・金曜は19時まで営業。">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+      color: #2c2c2c;
+      line-height: 1.8;
+      background: #fff;
+    }
+
+    /* ===== ヘッダー ===== */
+    header {
+      background: #d35400;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: white;
+    }
+    .logo-icon {
+      font-size: 28px;
+      line-height: 1;
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .logo-name {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .logo-group {
+      font-size: 11px;
+      opacity: 0.85;
+      letter-spacing: 0.03em;
+    }
+    nav {
+      display: flex;
+      gap: 4px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+    }
+    .mobile-menu {
+      display: none;
+      background: #b94600;
+      padding: 12px 20px;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      display: block;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* ===== お知らせバー ===== */
+    .notice-bar {
+      background: #e67e22;
+      color: white;
+      font-size: 13px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .notice-bar-inner {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0;
+    }
+    .notice-item {
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-right: 1px solid rgba(255,255,255,0.3);
+    }
+    .notice-item:last-child { border-right: none; }
+    .notice-icon {
+      font-size: 15px;
+    }
+
+    /* ===== ヒーロー ===== */
+    .hero {
+      background: linear-gradient(135deg, #e67e22 0%, #d35400 60%, #c0392b 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 20px 90px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-content {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 5vw, 42px);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .hero p {
+      font-size: clamp(15px, 2.5vw, 18px);
+      opacity: 0.9;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+    .hero-tel {
+      display: inline-block;
+      background: white;
+      color: #d35400;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-size: 22px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-tel:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+    }
+    .hero-tel-label {
+      font-size: 12px;
+      font-weight: normal;
+      display: block;
+      color: #888;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== 共通セクション ===== */
+    section { padding: 64px 20px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-title h2 {
+      font-size: clamp(22px, 3.5vw, 30px);
+      font-weight: 700;
+      color: #d35400;
+      margin-bottom: 8px;
+    }
+    .section-title p {
+      font-size: 14px;
+      color: #888;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .section-title .underline {
+      width: 48px;
+      height: 3px;
+      background: #e67e22;
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ===== 3つの特徴カード ===== */
+    .features { background: #fef9f0; }
+    .feature-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 2px 16px rgba(211,84,0,0.08);
+      border-top: 4px solid #e67e22;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(211,84,0,0.14);
+    }
+    .feature-icon {
+      font-size: 44px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #d35400;
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    /* ===== 処方箋案内 ===== */
+    .prescription { background: white; }
+    .prescription-methods {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .method-card {
+      border: 2px solid #e67e22;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .method-header {
+      background: #e67e22;
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .method-header .icon { font-size: 22px; }
+    .method-body {
+      padding: 20px;
+    }
+    .method-body p {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 10px;
+      line-height: 1.7;
+    }
+    .method-body .label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #d35400;
+      letter-spacing: 0.03em;
+    }
+    .method-body .value {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .epark-btn {
+      display: inline-block;
+      background: #e67e22;
+      color: white;
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      margin-top: 8px;
+      transition: background 0.2s;
+    }
+    .epark-btn:hover { background: #d35400; }
+    .reception-note {
+      background: #fef9f0;
+      border-left: 4px solid #e67e22;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      font-size: 14px;
+      color: #555;
+    }
+    .reception-note strong {
+      display: block;
+      color: #d35400;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    /* ===== ギャラリー ===== */
+    .gallery { background: #fff; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(211,84,0,0.10);
+      aspect-ratio: 4/3;
+    }
+    .gallery-item.main { aspect-ratio: 4/3; }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-caption {
+      text-align: center;
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: #888;
+    }
+    @media (max-width: 680px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item.main { grid-column: 1 / -1; aspect-ratio: 16/9; }
+    }
+
+    /* ===== 営業時間 ===== */
+    .hours { background: #fef9f0; }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(211,84,0,0.08);
+    }
+    .hours-table th {
+      background: #d35400;
+      color: white;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .hours-table td {
+      padding: 14px 16px;
+      text-align: center;
+      border-bottom: 1px solid #f0e0d0;
+      font-size: 15px;
+    }
+    .hours-table tr:last-child td { border-bottom: none; }
+    .hours-table .day-col {
+      font-weight: 700;
+      color: #444;
+      background: #fef9f0;
+      width: 35%;
+      text-align: left;
+      padding-left: 24px;
+    }
+    .hours-table .time-col { color: #333; }
+    .hours-table .open {
+      color: #d35400;
+      font-weight: 700;
+    }
+    .hours-table .closed { color: #aaa; }
+    .hours-table .highlight { background: #fff8f0; }
+    .hours-label {
+      display: inline-block;
+      background: #e67e22;
+      color: white;
+      font-size: 11px;
+      padding: 1px 8px;
+      border-radius: 10px;
+      margin-left: 6px;
+      vertical-align: middle;
+      font-weight: 700;
+    }
+    .hours-note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #888;
+      text-align: center;
+    }
+
+    /* ===== アクセス ===== */
+    .access { background: white; }
+    .access-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .access-info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .access-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .access-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .access-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #d35400;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+    .access-value {
+      font-size: 15px;
+      color: #333;
+    }
+    .access-tel-link {
+      font-size: 22px;
+      font-weight: 700;
+      color: #d35400;
+      text-decoration: none;
+      display: block;
+    }
+    .access-tel-link:hover { text-decoration: underline; }
+    .map-embed {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      height: 280px;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .map-placeholder {
+      font-size: 36px;
+    }
+    .map-open-btn {
+      display: inline-block;
+      background: #d35400;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+    .map-open-btn:hover { background: #b94600; }
+    .map-note {
+      font-size: 12px;
+      color: #888;
+    }
+
+    /* ===== グループ紹介バナー ===== */
+    .group-banner {
+      background: linear-gradient(90deg, #d35400 0%, #e67e22 100%);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .group-banner h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .group-banner p {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    /* ===== フッター ===== */
+    footer {
+      background: #2c2c2c;
+      color: #ccc;
+      padding: 40px 20px 20px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .footer-main {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .footer-info .footer-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+    .footer-info .footer-group {
+      font-size: 12px;
+      color: #e67e22;
+      margin-bottom: 12px;
+    }
+    .footer-info p {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.9;
+    }
+    .footer-nav h4 {
+      color: white;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .footer-nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .footer-nav a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: #e67e22; }
+    .footer-bottom {
+      border-top: 1px solid #444;
+      padding-top: 16px;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+    }
+
+    /* ===== レスポンシブ ===== */
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu.open { display: flex; }
+
+      .notice-bar-inner { flex-direction: column; gap: 0; }
+      .notice-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        justify-content: center;
+        padding: 8px 16px;
+      }
+      .notice-item:last-child { border-bottom: none; }
+
+      .hero { padding: 52px 20px 60px; }
+
+      .feature-cards { grid-template-columns: 1fr; }
+      .feature-card { padding: 24px 20px; }
+
+      .prescription-methods { grid-template-columns: 1fr; }
+
+      .hours-table .day-col { padding-left: 16px; }
+
+      .access-content { grid-template-columns: 1fr; }
+      .map-embed { height: 220px; }
+
+      .footer-main { grid-template-columns: 1fr; gap: 20px; }
+
+      section { padding: 48px 16px; }
+    }
+    @media (max-width: 480px) {
+      .logo-name { font-size: 15px; }
+      .logo-icon { font-size: 22px; }
+      .hero h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== ヘッダー ===== -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <span class="logo-icon">💊</span>
+      <span class="logo-text">
+        <span class="logo-name">ファイン調剤薬局</span>
+        <span class="logo-group">トクオカ薬局グループ</span>
+      </span>
+    </a>
+    <nav>
+      <a href="#features">特徴</a>
+      <a href="#prescription">処方箋受付</a>
+      <a href="#hours">営業時間</a>
+      <a href="#access">アクセス</a>
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#features" onclick="toggleMenu()">当薬局の特徴</a>
+    <a href="#prescription" onclick="toggleMenu()">処方箋受付</a>
+    <a href="#hours" onclick="toggleMenu()">営業時間</a>
+    <a href="#access" onclick="toggleMenu()">アクセス・お電話</a>
+  </div>
+</header>
+
+<!-- ===== お知らせバー ===== -->
+<div class="notice-bar">
+  <div class="notice-bar-inner">
+    <div class="notice-item">
+      <span class="notice-icon">📱</span>
+      <span>処方箋ネット受付対応（EPARK）</span>
+    </div>
+    <div class="notice-item">
+      <span class="notice-icon">🚗</span>
+      <span>無料駐車場 16台完備</span>
+    </div>
+    <div class="notice-item">
+      <span class="notice-icon">🕖</span>
+      <span>金曜日は19時まで営業</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ヒーロー ===== -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <span class="hero-badge">トクオカ薬局グループ｜丹波市山南町</span>
+    <h1>地域の健康を、<br>明るくサポートします</h1>
+    <p>
+      ファイン調剤薬局は、兵庫県丹波市山南町の調剤薬局です。<br>
+      お薬のことはもちろん、日々の健康についてもお気軽にご相談ください。
+    </p>
+    <a href="tel:0795771002" class="hero-tel">
+      <span class="hero-tel-label">お電話でのお問い合わせ</span>
+      📞 0795-77-1002
+    </a>
+  </div>
+</section>
+
+<!-- ===== 3つの特徴カード ===== -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>ファイン調剤薬局の特徴</h2>
+      <p>Features</p>
+      <div class="underline"></div>
+    </div>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <span class="feature-icon">📱</span>
+        <h3>処方箋ネット受付</h3>
+        <p>
+          「EPARKくすりの窓口」から24時間いつでも処方箋の受付が可能です。
+          スマートフォンで簡単に事前登録でき、待ち時間の目安も確認できます。
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🚗</span>
+        <h3>広い無料駐車場</h3>
+        <p>
+          無料の駐車場を約16台分ご用意しています。
+          お車でのご来局も安心してお越しください。
+          介護が必要な方のサポートも丁寧に対応します。
+        </p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🕖</span>
+        <h3>金曜は19時まで営業</h3>
+        <p>
+          金曜日は通常より1時間延長し、19時まで営業しています。
+          お仕事帰りや夕方のお受け取りにも対応できます。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ギャラリー ===== -->
+<section class="gallery" id="gallery">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>店舗のご紹介</h2>
+      <p>Gallery</p>
+      <div class="underline"></div>
+    </div>
+    <div class="gallery-grid">
+      <div>
+        <div class="gallery-item main">
+          <img src="https://cdn.peraichi.com/userData/6162520c-cac0-42ef-8550-08440a000ac3/img/678a1bdb76485/original.jpeg" alt="ファイン調剤薬局 外観" loading="lazy">
+        </div>
+        <p class="gallery-caption">店舗外観（丹波市山南町谷川）</p>
+      </div>
+      <div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1576671081837-49000212a370?w=800&q=80" alt="調剤カウンター" loading="lazy">
+        </div>
+        <p class="gallery-caption">調剤カウンター</p>
+      </div>
+      <div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=800&q=80" alt="お薬相談" loading="lazy">
+        </div>
+        <p class="gallery-caption">お薬のご相談</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 処方箋案内 ===== -->
+<section class="prescription" id="prescription">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>処方箋の受付方法</h2>
+      <p>Prescription</p>
+      <div class="underline"></div>
+    </div>
+    <div class="prescription-methods">
+      <!-- ネット受付 -->
+      <div class="method-card">
+        <div class="method-header">
+          <span class="icon">📱</span>
+          <span>ネット受付（EPARK）</span>
+        </div>
+        <div class="method-body">
+          <p>スマートフォンやパソコンから処方箋画像を送信いただくと、お薬の準備を先行して行います。待ち時間を大幅に短縮できます。</p>
+          <p class="label">受付サービス</p>
+          <p class="value">EPARKくすりの窓口</p>
+          <p class="label">受付時間</p>
+          <p class="value">24時間・年中無休（準備開始は営業時間内）</p>
+          <a href="https://www.kusurinomadoguchi.com/" target="_blank" rel="noopener" class="epark-btn">EPARKで受付する →</a>
+        </div>
+      </div>
+      <!-- FAX受付 -->
+      <div class="method-card">
+        <div class="method-header">
+          <span class="icon">📠</span>
+          <span>FAX事前送信</span>
+        </div>
+        <div class="method-body">
+          <p>処方箋のFAX送信にも対応しています。事前にFAXをいただくことで、スムーズにお薬をご用意できます。</p>
+          <p class="label">FAX番号</p>
+          <p class="value">0795-77-1019</p>
+          <p class="label">注意事項</p>
+          <p class="value">FAX受付後、必ず原本の処方箋をご持参ください。FAXのみでのお渡しはできません。</p>
+        </div>
+      </div>
+    </div>
+    <div class="reception-note">
+      <strong>受付に関するご注意</strong>
+      ネット受付・FAX受付はいずれも事前準備のためのサービスです。お薬のお受け取りには、必ず処方箋原本をご持参ください。ご来局前にご不明点がございましたら、お気軽にお電話ください。
+    </div>
+  </div>
+</section>
+
+<!-- ===== 営業時間 ===== -->
+<section class="hours" id="hours">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>営業時間</h2>
+      <p>Business Hours</p>
+      <div class="underline"></div>
+    </div>
+    <table class="hours-table">
+      <thead>
+        <tr>
+          <th style="text-align:left; padding-left:24px;">曜日</th>
+          <th>営業時間</th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="day-col">月曜日</td>
+          <td class="time-col open">8:30〜18:00</td>
+          <td>通常営業</td>
+        </tr>
+        <tr>
+          <td class="day-col">火曜日</td>
+          <td class="time-col open">8:30〜18:00</td>
+          <td>通常営業</td>
+        </tr>
+        <tr>
+          <td class="day-col">水曜日</td>
+          <td class="time-col open">8:30〜18:00</td>
+          <td>通常営業</td>
+        </tr>
+        <tr>
+          <td class="day-col">木曜日</td>
+          <td class="time-col open">8:30〜12:30</td>
+          <td>午前のみ</td>
+        </tr>
+        <tr class="highlight">
+          <td class="day-col">金曜日 <span class="hours-label">延長</span></td>
+          <td class="time-col open">8:30〜19:00</td>
+          <td>19時まで！</td>
+        </tr>
+        <tr>
+          <td class="day-col">土曜日</td>
+          <td class="time-col open">8:30〜12:30</td>
+          <td>午前のみ</td>
+        </tr>
+        <tr>
+          <td class="day-col">日曜日</td>
+          <td class="time-col closed">休診</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td class="day-col">祝日</td>
+          <td class="time-col closed">休診</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="hours-note">※ 年末年始・お盆などの休業については、店頭掲示またはお電話にてご確認ください。</p>
+  </div>
+</section>
+
+<!-- ===== アクセス ===== -->
+<section class="access" id="access">
+  <div class="section-inner">
+    <div class="section-title">
+      <h2>アクセス・お問い合わせ</h2>
+      <p>Access</p>
+      <div class="underline"></div>
+    </div>
+    <div class="access-content">
+      <div class="access-info">
+        <div class="access-row">
+          <span class="access-icon">📍</span>
+          <div>
+            <p class="access-label">住所</p>
+            <p class="access-value">〒669-3131<br>兵庫県丹波市山南町谷川537-1</p>
+          </div>
+        </div>
+        <div class="access-row">
+          <span class="access-icon">📞</span>
+          <div>
+            <p class="access-label">電話番号</p>
+            <a href="tel:0795771002" class="access-tel-link">0795-77-1002</a>
+          </div>
+        </div>
+        <div class="access-row">
+          <span class="access-icon">📠</span>
+          <div>
+            <p class="access-label">FAX番号</p>
+            <p class="access-value">0795-77-1019</p>
+          </div>
+        </div>
+        <div class="access-row">
+          <span class="access-icon">🚃</span>
+          <div>
+            <p class="access-label">公共交通機関</p>
+            <p class="access-value">JR加古川線 久下村駅より<br>徒歩 約11分</p>
+          </div>
+        </div>
+        <div class="access-row">
+          <span class="access-icon">🚗</span>
+          <div>
+            <p class="access-label">お車でのご来局</p>
+            <p class="access-value">無料駐車場あり（約16台）</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="map-embed">
+          <span class="map-placeholder">🗺️</span>
+          <p class="map-note">兵庫県丹波市山南町谷川537-1</p>
+          <a
+            href="https://maps.google.com/?q=兵庫県丹波市山南町谷川537-1"
+            target="_blank"
+            rel="noopener"
+            class="map-open-btn"
+          >Google マップで開く</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== グループ紹介バナー ===== -->
+<div class="group-banner">
+  <h3>トクオカ薬局グループ</h3>
+  <p>ファイン調剤薬局はトクオカ薬局グループの一員です。<br>グループ全体で、地域の皆さまの健康をサポートしています。</p>
+</div>
+
+<!-- ===== フッター ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-main">
+      <div class="footer-info">
+        <p class="footer-name">💊 ファイン調剤薬局</p>
+        <p class="footer-group">トクオカ薬局グループ</p>
+        <p>
+          〒669-3131 兵庫県丹波市山南町谷川537-1<br>
+          TEL：0795-77-1002　FAX：0795-77-1019<br>
+          月〜水・金：8:30〜18:00（金は〜19:00）<br>
+          木・土：8:30〜12:30　日・祝：休み
+        </p>
+      </div>
+      <div class="footer-nav">
+        <h4>メニュー</h4>
+        <ul>
+          <li><a href="#features">当薬局の特徴</a></li>
+          <li><a href="#prescription">処方箋の受付方法</a></li>
+          <li><a href="#hours">営業時間</a></li>
+          <li><a href="#access">アクセス</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ファイン調剤薬局　All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+
+  // スムーススクロール
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const noticeHeight = document.querySelector('.notice-bar').offsetHeight;
+        const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - noticeHeight - 8;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
