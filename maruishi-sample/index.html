@@ -4,121 +4,229 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>まるいし薬局 | 丹波市山南町の調剤薬局</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* ===== リセット・ベース ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
-      color: #2c2c2c;
+      font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      color: #1e2a22;
       line-height: 1.8;
+      background: #fafaf8;
+      overflow-x: hidden;
     }
     a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; }
+    img { max-width: 100%; display: block; }
 
     /* ===== カラー変数 ===== */
     :root {
-      --green-dark:  #1a6b3a;
-      --green-main:  #27ae60;
-      --green-light: #e8f5e9;
-      --green-mid:   #c8e6c9;
-      --white:       #ffffff;
-      --text-dark:   #2c2c2c;
-      --text-mid:    #555555;
-      --border:      #d0e8d0;
+      --forest:      #1c4a2e;
+      --forest-mid:  #2d6a45;
+      --sage:        #4a8c61;
+      --sage-light:  #7ab893;
+      --gold:        #b8912a;
+      --gold-light:  #d4ab4a;
+      --cream:       #fafaf8;
+      --off-white:   #f4f2ec;
+      --warm-gray:   #8a8578;
+      --text-dark:   #1e2a22;
+      --text-mid:    #4a5548;
+      --border:      #dde8e0;
     }
+
+    /* ===== スクロールアニメーション ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.from-left {
+      transform: translateX(-40px);
+    }
+    .reveal.from-right {
+      transform: translateX(40px);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translate(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
 
     /* ===== ヘッダー ===== */
     header {
-      background: var(--green-dark);
-      color: var(--white);
-      padding: 0 40px;
+      background: rgba(28, 74, 46, 0.97);
+      backdrop-filter: blur(12px);
+      color: #fff;
+      padding: 0 48px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 68px;
+      height: 72px;
       position: sticky;
       top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      z-index: 1000;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.08), 0 4px 24px rgba(0,0,0,0.18);
+      transition: background 0.3s;
     }
     .header-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
-    .header-logo .logo-icon {
-      font-size: 1.6rem;
-      line-height: 1;
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
     }
-    .header-logo .logo-text {
-      font-size: 1.15rem;
+    .logo-text-block .logo-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.05rem;
       font-weight: 700;
-      letter-spacing: 0.05em;
-      line-height: 1.3;
-    }
-    .header-logo .logo-sub {
-      font-size: 0.72rem;
-      font-weight: 400;
-      opacity: 0.82;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
       display: block;
+    }
+    .logo-text-block .logo-ja {
+      font-size: 0.78rem;
+      font-weight: 500;
+      opacity: 0.75;
+      letter-spacing: 0.06em;
     }
     nav {
       display: flex;
-      gap: 28px;
+      gap: 32px;
       align-items: center;
     }
     nav a {
-      font-size: 0.92rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      opacity: 0.9;
-      transition: opacity 0.2s;
-      padding-bottom: 2px;
-      border-bottom: 2px solid transparent;
-    }
-    nav a:hover {
-      opacity: 1;
-      border-bottom-color: #7bdc9e;
-    }
-    .nav-tel {
-      background: var(--green-main);
-      padding: 6px 16px;
-      border-radius: 20px;
       font-size: 0.88rem;
-      font-weight: 700;
-      opacity: 1 !important;
-      border-bottom: none !important;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+      position: relative;
     }
-    .nav-tel:hover { background: #219a52; }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1px;
+      background: var(--gold-light);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+    }
+    nav a:hover { opacity: 1; }
+    nav a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: var(--forest) !important;
+      padding: 9px 22px;
+      border-radius: 24px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+      opacity: 1 !important;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+      box-shadow: 0 2px 10px rgba(184,145,42,0.35);
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(184,145,42,0.45) !important;
+    }
 
-    /* ===== ハンバーガー（SP） ===== */
+    /* ===== ハンバーガー ===== */
     .hamburger {
       display: none;
       flex-direction: column;
-      gap: 5px;
+      justify-content: center;
+      gap: 6px;
       cursor: pointer;
-      padding: 4px;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      padding: 10px;
+      transition: background 0.2s;
     }
+    .hamburger:hover { background: rgba(255,255,255,0.08); }
     .hamburger span {
       display: block;
-      width: 24px;
       height: 2px;
-      background: var(--white);
+      background: #fff;
       border-radius: 2px;
-      transition: 0.3s;
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.25s;
+      transform-origin: center;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* ===== モバイルナビ ===== */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: rgba(22, 60, 38, 0.98);
+      backdrop-filter: blur(16px);
+      padding: 24px 28px 32px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 0;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      transform: translateY(-8px);
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.3s;
+    }
+    .mobile-nav.open {
+      display: flex;
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .mobile-nav a {
+      color: rgba(255,255,255,0.88);
+      font-size: 1.05rem;
+      font-weight: 500;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      letter-spacing: 0.04em;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .mobile-nav a:last-child { border-bottom: none; }
+    .mobile-nav .nav-cta {
+      margin-top: 16px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: var(--forest) !important;
+      justify-content: center;
+      border-radius: 24px;
+      font-weight: 700;
+      padding: 14px 0;
     }
 
     /* ===== お知らせバー ===== */
     .notice-bar {
-      background: var(--green-main);
-      color: var(--white);
-      padding: 8px 40px;
+      background: var(--forest-mid);
+      color: rgba(255,255,255,0.92);
+      padding: 9px 48px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 32px;
-      font-size: 0.88rem;
-      font-weight: 600;
+      gap: 36px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
       flex-wrap: wrap;
     }
     .notice-bar span {
@@ -126,494 +234,865 @@
       align-items: center;
       gap: 6px;
     }
+    .notice-dot {
+      width: 7px; height: 7px;
+      background: var(--gold-light);
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
 
-    /* ===== ヒーロー ===== */
+    /* ===== ヒーロー (2カラム) ===== */
     .hero {
-      background: linear-gradient(135deg, #1a6b3a 0%, #27ae60 55%, #52c07a 100%);
-      color: var(--white);
-      padding: 90px 40px 80px;
-      text-align: center;
+      min-height: calc(100vh - 72px - 38px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--forest);
       position: relative;
       overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 320px; height: 320px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 50%;
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 60px 80px 72px;
+      position: relative;
+      z-index: 2;
     }
-    .hero::after {
+    /* 微妙な装飾 */
+    .hero-left::before {
       content: '';
       position: absolute;
-      bottom: -80px; left: -40px;
-      width: 260px; height: 260px;
-      background: rgba(255,255,255,0.05);
+      top: 60px; left: 40px;
+      width: 180px; height: 180px;
+      border: 1px solid rgba(255,255,255,0.06);
       border-radius: 50%;
+      pointer-events: none;
     }
     .hero-badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 20px;
-      padding: 4px 18px;
-      font-size: 0.82rem;
-      margin-bottom: 22px;
-      letter-spacing: 0.08em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(184,145,42,0.2);
+      border: 1px solid rgba(184,145,42,0.5);
+      color: var(--gold-light);
+      border-radius: 24px;
+      padding: 6px 18px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 28px;
+      width: fit-content;
+      animation: hero-fade-up 0.9s cubic-bezier(0.22,1,0.36,1) both;
     }
     .hero h1 {
-      font-size: 2.0rem;
-      font-weight: 800;
-      line-height: 1.5;
-      margin-bottom: 18px;
-      letter-spacing: 0.03em;
-      position: relative;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.45;
+      letter-spacing: 0.02em;
+      margin-bottom: 22px;
+      animation: hero-fade-up 0.9s 0.12s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--gold-light), #e8c96a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .hero-sub {
-      font-size: 1.0rem;
-      opacity: 0.88;
-      margin-bottom: 36px;
-      position: relative;
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.9;
+      margin-bottom: 40px;
+      animation: hero-fade-up 0.9s 0.24s cubic-bezier(0.22,1,0.36,1) both;
     }
     .hero-actions {
       display: flex;
-      justify-content: center;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
+      animation: hero-fade-up 0.9s 0.36s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @keyframes hero-fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: var(--forest);
+      padding: 14px 30px;
+      border-radius: 28px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(184,145,42,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      min-height: 44px;
     }
-    .btn-primary {
-      background: var(--white);
-      color: var(--green-dark);
-      padding: 12px 32px;
-      border-radius: 26px;
-      font-weight: 700;
-      font-size: 0.97rem;
-      transition: 0.2s;
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(184,145,42,0.5);
+    }
+    .btn-outline-white {
+      border: 1.5px solid rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.9);
+      padding: 14px 30px;
+      border-radius: 28px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      min-height: 44px;
     }
-    .btn-primary:hover {
-      background: #f0faf4;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .btn-outline {
-      border: 2px solid var(--white);
-      color: var(--white);
-      padding: 12px 32px;
-      border-radius: 26px;
-      font-weight: 700;
-      font-size: 0.97rem;
-      transition: 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .btn-outline:hover {
-      background: rgba(255,255,255,0.15);
-      transform: translateY(-1px);
+    .btn-outline-white:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.7);
+      transform: translateY(-2px);
     }
 
+    /* Ripple */
+    .ripple-btn { position: relative; overflow: hidden; }
+    .ripple-btn .ripple-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      transform: scale(0);
+      animation: ripple-anim 0.6s linear;
+      pointer-events: none;
+    }
+    @keyframes ripple-anim {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+      animation: hero-fade-in 1.2s 0.2s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @keyframes hero-fade-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-right::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--forest) 0%, transparent 30%), linear-gradient(0deg, var(--forest) 0%, transparent 20%);
+    }
+
+    /* ===== Wave Divider ===== */
+    .wave-divider {
+      line-height: 0;
+      overflow: hidden;
+    }
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+    }
+    .wave-up { background: var(--off-white); }
+    .wave-down { background: var(--forest); }
+
     /* ===== セクション共通 ===== */
-    section { padding: 72px 40px; }
-    .section-inner { max-width: 960px; margin: 0 auto; }
-    .section-label {
-      display: inline-block;
-      background: var(--green-light);
-      color: var(--green-dark);
-      font-size: 0.78rem;
+    section { padding: 96px 48px; }
+    .section-inner { max-width: 1040px; margin: 0 auto; }
+    .section-head { margin-bottom: 56px; }
+    .section-head.centered { text-align: center; }
+    .section-en {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
-      padding: 3px 14px;
-      border-radius: 12px;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: block;
       margin-bottom: 10px;
     }
     .section-title {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--green-dark);
-      margin-bottom: 8px;
+      font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+      font-weight: 900;
+      color: var(--forest);
       letter-spacing: 0.02em;
+      line-height: 1.4;
     }
     .section-desc {
+      margin-top: 12px;
       color: var(--text-mid);
       font-size: 0.95rem;
-      margin-bottom: 48px;
+      line-height: 1.85;
+    }
+    .gold-line {
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 2px;
+      margin-top: 16px;
+    }
+    .centered .gold-line { margin: 16px auto 0; }
+
+    /* ===== 数字セクション ===== */
+    .stats-section {
+      background: var(--forest);
+      padding: 72px 48px;
+      position: relative;
+    }
+    .stats-grid {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 32px 24px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 800;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .stat-unit {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .stat-label {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 500;
+      letter-spacing: 0.05em;
     }
 
-    /* ===== 特徴カード ===== */
-    .features { background: var(--green-light); }
-    .card-grid {
+    /* ===== 特徴ジグザグ ===== */
+    .features-section { background: var(--off-white); }
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+    .feature-row:last-child { margin-bottom: 0; }
+    .feature-row.reverse { direction: rtl; }
+    .feature-row.reverse > * { direction: ltr; }
+    .feature-visual {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(28,74,46,0.15);
+      aspect-ratio: 4/3;
+      position: relative;
+    }
+    .feature-visual img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .feature-visual:hover img { transform: scale(1.04); }
+    .feature-visual-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(28,74,46,0.4) 100%);
+    }
+    .feature-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 4.5rem;
+      font-weight: 800;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: -8px;
+    }
+    .feature-icon-box {
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, var(--forest) 0%, var(--forest-mid) 100%);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(28,74,46,0.25);
+    }
+    .feature-content h3 {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--forest);
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+    .feature-content p {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.9;
+    }
+
+    /* ===== メッセージ（薬剤師） ===== */
+    .message-section { background: var(--cream); }
+    .message-card {
+      background: #fff;
+      border-radius: 24px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      box-shadow: 0 8px 40px rgba(28,74,46,0.1);
+      border: 1px solid var(--border);
+    }
+    .message-photo {
+      position: relative;
+      background: var(--off-white);
+      overflow: hidden;
+    }
+    .message-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .message-photo-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(0deg, rgba(28,74,46,0.85) 0%, transparent 60%);
+      padding: 28px 24px 20px;
+      color: #fff;
+    }
+    .message-photo-overlay .staff-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .message-photo-overlay .staff-title {
+      font-size: 0.78rem;
+      opacity: 0.8;
+      margin-top: 2px;
+      letter-spacing: 0.06em;
+    }
+    .message-body {
+      padding: 52px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .message-quote {
+      font-family: 'Poppins', sans-serif;
+      font-size: 4rem;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 8px;
+      opacity: 0.6;
+    }
+    .message-body p {
+      font-size: 0.97rem;
+      color: var(--text-mid);
+      line-height: 2.0;
+      margin-bottom: 16px;
+    }
+    .message-sig {
+      font-size: 0.85rem;
+      color: var(--warm-gray);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .message-sig span {
+      color: var(--forest);
+    }
+
+    /* ===== 処方箋 ===== */
+    .prescription-section { background: var(--off-white); }
+    .rx-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
-    .card {
-      background: var(--white);
-      border-radius: 16px;
+    .rx-card {
+      background: #fff;
+      border-radius: 20px;
       padding: 36px 28px;
-      box-shadow: 0 2px 12px rgba(26,107,58,0.08);
       border: 1px solid var(--border);
-      transition: 0.25s;
+      box-shadow: 0 2px 16px rgba(28,74,46,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(26,107,58,0.14);
+    .rx-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(28,74,46,0.13);
     }
-    .card-icon {
-      font-size: 2.6rem;
-      margin-bottom: 16px;
-      display: block;
+    .rx-card-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--forest) 0%, var(--forest-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
     }
-    .card h3 {
-      font-size: 1.08rem;
+    .rx-card h3 {
+      font-size: 1.05rem;
       font-weight: 800;
-      color: var(--green-dark);
-      margin-bottom: 10px;
+      color: var(--forest);
+      margin-bottom: 14px;
     }
-    .card p {
+    .rx-fax {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--forest);
+      letter-spacing: 0.04em;
+      margin: 6px 0 4px;
+    }
+    .rx-note {
+      font-size: 0.8rem;
+      color: var(--warm-gray);
+    }
+    .rx-card p, .rx-card li {
       font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.85;
+    }
+    .rx-card ul {
+      padding-left: 18px;
+    }
+    .rx-card li { margin-bottom: 4px; }
+
+    /* ===== 営業時間 ===== */
+    .hours-section { background: #fff; }
+    .hours-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .hours-table-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(28,74,46,0.07);
+    }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      background: #fff;
+    }
+    .hours-table th {
+      background: var(--forest);
+      color: rgba(255,255,255,0.88);
+      padding: 14px 20px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-align: left;
+      font-size: 0.82rem;
+    }
+    .hours-table td {
+      padding: 13px 20px;
+      border-bottom: 1px solid #f0f4f1;
+      vertical-align: middle;
+      color: var(--text-mid);
+    }
+    .hours-table tr:last-child td { border-bottom: none; }
+    .hours-table tr:nth-child(even) td { background: #fbfcfb; }
+    .tag-open {
+      background: var(--sage);
+      color: #fff;
+      padding: 3px 12px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .tag-closed {
+      background: #e8e6e0;
+      color: #9a9690;
+      padding: 3px 12px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .hours-info-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .hours-info-card {
+      background: var(--off-white);
+      border-radius: 14px;
+      padding: 22px 24px;
+      border: 1px solid var(--border);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: transform 0.25s;
+    }
+    .hours-info-card:hover { transform: translateX(4px); }
+    .hours-info-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .hours-info-card h4 {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--forest);
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .hours-info-card p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+    .hours-note-bar {
+      margin-top: 24px;
+      padding: 14px 18px;
+      background: rgba(184,145,42,0.08);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      font-size: 0.84rem;
       color: var(--text-mid);
       line-height: 1.75;
     }
 
-    /* ===== 処方箋案内 ===== */
-    .prescription { background: var(--white); }
-    .rx-box {
-      background: var(--green-light);
-      border-radius: 16px;
-      padding: 40px 48px;
-      border: 2px solid var(--green-mid);
+    /* ===== FAQ ===== */
+    .faq-section { background: var(--off-white); }
+    .faq-list {
       display: flex;
-      gap: 48px;
-      align-items: flex-start;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 12px;
     }
-    .rx-item { flex: 1; min-width: 220px; }
-    .rx-item h3 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--green-dark);
-      margin-bottom: 12px;
+    .faq-item {
+      background: #fff;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow 0.25s;
+    }
+    .faq-item.open { box-shadow: 0 6px 24px rgba(28,74,46,0.1); }
+    .faq-q {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 16px;
+      padding: 20px 24px;
+      cursor: pointer;
+      user-select: none;
+      min-height: 44px;
+      transition: background 0.2s;
     }
-    .rx-item p, .rx-item li {
+    .faq-q:hover { background: #f8faf8; }
+    .faq-icon {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--forest), var(--forest-mid));
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.88rem;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .faq-q-text {
+      flex: 1;
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--forest);
+      line-height: 1.5;
+    }
+    .faq-arrow {
+      width: 22px; height: 22px;
+      color: var(--sage);
+      flex-shrink: 0;
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.22,1,0.36,1), padding 0.35s;
+    }
+    .faq-a-inner {
+      padding: 0 24px 20px 70px;
       font-size: 0.92rem;
       color: var(--text-mid);
-      line-height: 1.8;
+      line-height: 1.9;
     }
-    .rx-item ul { padding-left: 18px; }
-    .rx-fax-number {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--green-dark);
-      letter-spacing: 0.04em;
-      margin: 8px 0;
-    }
-    .rx-note {
-      font-size: 0.8rem;
-      color: #888;
-      margin-top: 4px;
-    }
-
-    /* ===== ギャラリー ===== */
-    .gallery { background: #fff; }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 40px;
-    }
-    .gallery-item {
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px rgba(26,107,58,0.10);
-      aspect-ratio: 4/3;
-    }
-    .gallery-item img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-      display: block;
-    }
-    .gallery-item:hover img { transform: scale(1.04); }
-    .gallery-caption {
-      text-align: center;
-      margin-top: 8px;
-      font-size: 0.82rem;
-      color: #888;
-    }
-    @media (max-width: 680px) {
-      .gallery-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    /* ===== 営業時間 ===== */
-    .hours { background: var(--green-light); }
-    .hours-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.95rem;
-      background: var(--white);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(26,107,58,0.08);
-    }
-    .hours-table th {
-      background: var(--green-dark);
-      color: var(--white);
-      padding: 14px 20px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-align: left;
-    }
-    .hours-table td {
-      padding: 14px 20px;
-      border-bottom: 1px solid #e8f5e9;
-      vertical-align: middle;
-    }
-    .hours-table tr:last-child td { border-bottom: none; }
-    .hours-table tr:nth-child(even) td { background: #f4fbf5; }
-    .tag-open {
-      background: var(--green-main);
-      color: var(--white);
-      padding: 2px 12px;
-      border-radius: 12px;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-    .tag-closed {
-      background: #e0e0e0;
-      color: #888;
-      padding: 2px 12px;
-      border-radius: 12px;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-    .hours-note {
-      margin-top: 16px;
-      font-size: 0.85rem;
-      color: var(--text-mid);
-      padding: 12px 16px;
-      background: var(--white);
-      border-radius: 8px;
-      border-left: 4px solid var(--green-main);
-    }
+    .faq-item.open .faq-a { max-height: 300px; }
 
     /* ===== アクセス ===== */
-    .access { background: var(--white); }
+    .access-section { background: #fff; }
     .access-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 48px;
       align-items: start;
     }
-    .access-info { display: flex; flex-direction: column; gap: 20px; }
+    .access-info { display: flex; flex-direction: column; gap: 18px; }
     .access-item {
       display: flex;
-      gap: 14px;
+      gap: 16px;
       align-items: flex-start;
+      padding: 18px 20px;
+      border-radius: 12px;
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      transition: transform 0.25s;
     }
-    .access-icon {
-      font-size: 1.4rem;
-      line-height: 1;
+    .access-item:hover { transform: translateX(4px); }
+    .access-icon-box {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--forest), var(--forest-mid));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
       flex-shrink: 0;
-      margin-top: 2px;
     }
     .access-item h4 {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--green-dark);
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--forest);
       letter-spacing: 0.08em;
       margin-bottom: 3px;
     }
     .access-item p {
-      font-size: 0.95rem;
-      color: var(--text-dark);
-    }
-    .access-item a { color: var(--green-dark); font-weight: 700; }
-    .access-item a:hover { text-decoration: underline; }
-    .access-map {
-      background: var(--green-light);
-      border-radius: 16px;
-      overflow: hidden;
-      border: 2px solid var(--green-mid);
-      height: 280px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
+      font-size: 0.9rem;
       color: var(--text-mid);
+      line-height: 1.7;
     }
-    .access-map iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    .map-placeholder {
-      text-align: center;
-      padding: 32px;
-    }
-    .map-placeholder .map-icon { font-size: 2.5rem; margin-bottom: 10px; }
-    .map-placeholder p { font-size: 0.9rem; color: var(--text-mid); }
-    .map-placeholder a {
-      display: inline-block;
-      margin-top: 14px;
-      background: var(--green-dark);
-      color: var(--white);
-      padding: 8px 22px;
+    .access-item a { color: var(--forest); font-weight: 700; }
+    .access-item a:hover { text-decoration: underline; }
+    .access-map-wrap {
       border-radius: 20px;
-      font-size: 0.88rem;
-      font-weight: 700;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(28,74,46,0.12);
+      border: 1px solid var(--border);
+      height: 360px;
     }
-    .map-placeholder a:hover { background: #155a30; }
+    .access-map-wrap iframe {
+      width: 100%; height: 100%;
+      border: none;
+      display: block;
+    }
 
-    /* ===== 2店舗バナー ===== */
-    .shops { background: var(--green-dark); color: var(--white); padding: 60px 40px; }
-    .shop-grid {
+    /* ===== 2店舗セクション ===== */
+    .shops-section {
+      background: var(--forest);
+      padding: 72px 48px;
+    }
+    .shops-grid {
+      max-width: 1040px;
+      margin: 48px auto 0;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 24px;
-      max-width: 800px;
-      margin: 32px auto 0;
     }
     .shop-card {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 14px;
-      padding: 28px 28px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 20px;
+      padding: 36px 32px;
+      transition: background 0.3s, transform 0.3s;
     }
-    .shop-card h3 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .shop-card:hover {
+      background: rgba(255,255,255,0.11);
+      transform: translateY(-4px);
     }
-    .shop-current {
-      background: var(--green-main);
-      padding: 2px 10px;
+    .shop-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: var(--forest);
+      padding: 2px 12px;
       border-radius: 10px;
       font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+    }
+    .shop-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
+      letter-spacing: 0.03em;
     }
     .shop-card p {
       font-size: 0.88rem;
-      opacity: 0.85;
-      line-height: 1.75;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.85;
     }
 
     /* ===== フッター ===== */
     footer {
-      background: #0f3d22;
-      color: rgba(255,255,255,0.75);
-      padding: 40px 40px 24px;
+      background: #111d15;
+      color: rgba(255,255,255,0.6);
+      padding: 52px 48px 28px;
     }
-    .footer-inner {
-      max-width: 960px;
-      margin: 0 auto;
-    }
+    .footer-inner { max-width: 1040px; margin: 0 auto; }
     .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 32px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      align-items: start;
     }
-    .footer-brand .logo-text {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 6px;
+    .footer-brand .f-logo {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .footer-brand .f-logo-mark {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+    .footer-brand .f-logo-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.04em;
     }
     .footer-brand p {
       font-size: 0.82rem;
-      line-height: 1.7;
+      line-height: 1.8;
     }
     .footer-links {
       display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
+      gap: 48px;
     }
     .footer-col h4 {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 700;
-      color: var(--white);
-      margin-bottom: 10px;
-      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+      text-transform: uppercase;
     }
     .footer-col ul { list-style: none; }
-    .footer-col li { margin-bottom: 6px; }
+    .footer-col li { margin-bottom: 8px; }
     .footer-col a {
       font-size: 0.83rem;
-      opacity: 0.75;
+      opacity: 0.65;
       transition: opacity 0.2s;
     }
     .footer-col a:hover { opacity: 1; }
     .footer-copy {
       text-align: center;
-      padding-top: 22px;
-      font-size: 0.8rem;
+      padding-top: 24px;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
     }
 
-    /* ===== スクロールアンカー補正 ===== */
-    :target { scroll-margin-top: 80px; }
+    /* ===== SVG Wave ===== */
+    .wave-section { line-height: 0; }
 
-    /* ===== レスポンシブ（タブレット〜） ===== */
-    @media (max-width: 900px) {
-      .card-grid { grid-template-columns: 1fr 1fr; }
+    /* ===== スクロールトップ ===== */
+    :target { scroll-margin-top: 88px; }
+
+    /* ===== レスポンシブ タブレット ===== */
+    @media (max-width: 1000px) {
+      header { padding: 0 28px; }
+      nav { gap: 22px; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { display: none; }
+      .hero-left { padding: 80px 40px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .feature-row { grid-template-columns: 1fr; gap: 36px; }
+      .feature-row.reverse { direction: ltr; }
+      .message-card { grid-template-columns: 1fr; }
+      .message-photo { height: 340px; }
+      .rx-grid { grid-template-columns: 1fr 1fr; }
+      .hours-layout { grid-template-columns: 1fr; }
       .access-grid { grid-template-columns: 1fr; }
-      .shop-grid { grid-template-columns: 1fr; }
-      .footer-top { flex-direction: column; }
+      .shops-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-links { gap: 28px; }
     }
 
-    /* ===== レスポンシブ（スマートフォン） ===== */
-    @media (max-width: 620px) {
-      header { padding: 0 20px; height: 60px; }
+    /* ===== レスポンシブ スマートフォン ===== */
+    @media (max-width: 640px) {
+      header { padding: 0 20px; height: 64px; }
       nav { display: none; }
-      nav.open {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 60px; left: 0; right: 0;
-        background: var(--green-dark);
-        padding: 20px 24px 28px;
-        gap: 16px;
-        z-index: 99;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-      }
-      nav.open a { font-size: 1.0rem; }
       .hamburger { display: flex; }
+      .mobile-nav { top: 64px; }
 
-      .notice-bar { padding: 8px 16px; gap: 14px; font-size: 0.8rem; }
+      .notice-bar { padding: 8px 16px; gap: 14px; font-size: 0.78rem; }
 
-      .hero { padding: 60px 20px 52px; }
-      .hero h1 { font-size: 1.45rem; }
+      .hero-left { padding: 56px 24px 52px; }
+      .hero h1 { font-size: clamp(1.5rem, 6vw, 2rem); }
 
-      section { padding: 52px 20px; }
-      .section-title { font-size: 1.3rem; }
+      section { padding: 64px 24px; }
+      .section-title { font-size: clamp(1.3rem, 5vw, 1.7rem); }
 
-      .card-grid { grid-template-columns: 1fr; gap: 16px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { padding: 24px 16px; }
+      .stat-num { font-size: 2.2rem; }
 
-      .rx-box { padding: 28px 24px; gap: 28px; flex-direction: column; }
-      .rx-fax-number { font-size: 1.3rem; }
+      .rx-grid { grid-template-columns: 1fr; }
 
-      .hours-table th, .hours-table td { padding: 10px 14px; font-size: 0.88rem; }
+      .message-body { padding: 32px 28px; }
 
-      .shops { padding: 48px 20px; }
-      .footer-links { gap: 24px; }
-      footer { padding: 32px 20px 20px; }
+      .hours-table th, .hours-table td { padding: 10px 14px; font-size: 0.85rem; }
+
+      .shops-section { padding: 56px 24px; }
+      .access-map-wrap { height: 260px; }
+
+      footer { padding: 40px 20px 24px; }
+      .footer-links { flex-direction: column; gap: 24px; }
     }
+  
+    @media (max-width: 768px) {
+      .section { padding: 52px 16px; }
+      .btn { padding: 12px 20px; font-size: 0.88rem; }
+      .hero-btns { gap: 10px; }
+      .gallery-sub-wrap { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .header-inner { padding: 0 14px; height: 60px; }
+      .logo-name { font-size: 1.05rem; }
+      .hero { height: 340px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-main { grid-column: span 1; }
+      .gallery-main img { height: 200px; min-height: unset; }
+      .gallery-grid-sub img { height: 160px; }
+      .hours-table th, .hours-table td { padding: 10px 10px; font-size: 0.85rem; }
+      .map-wrap iframe { height: 240px; }
+      .feature-card { padding: 24px 18px; }
+      .footer-tel { font-size: 1.15rem; }
+      .notice-bar { padding: 10px 14px; }
+      .notice-item { font-size: 0.82rem; }
+      .section-title { font-size: 1.4rem; }
+    }
+
   </style>
 </head>
 <body>
@@ -621,130 +1100,233 @@
   <!-- ===== ヘッダー ===== -->
   <header>
     <div class="header-logo">
-      <span class="logo-icon">💊</span>
-      <div class="logo-text">
-        まるいし薬局
-        <span class="logo-sub">有限会社まるいし薬局</span>
+      <div class="logo-mark">💊</div>
+      <div class="logo-text-block">
+        <span class="logo-name">MARUISHI PHARMACY</span>
+        <span class="logo-ja">まるいし薬局</span>
       </div>
     </div>
     <nav id="global-nav">
-      <a href="#top">TOP</a>
-      <a href="#features">当薬局について</a>
+      <a href="#about">当薬局について</a>
       <a href="#prescription">処方箋</a>
       <a href="#hours">営業時間</a>
+      <a href="#faq">よくある質問</a>
       <a href="#access">アクセス</a>
-      <a href="tel:0795760104" class="nav-tel">📞 0795-76-0104</a>
+      <a href="tel:0795760104" class="nav-cta">📞 0795-76-0104</a>
     </nav>
-    <div class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="メニューを開く">
+    <div class="hamburger" id="hamburger" aria-label="メニューを開く" role="button" tabindex="0">
       <span></span><span></span><span></span>
     </div>
   </header>
 
+  <!-- ===== モバイルナビ ===== -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#about">当薬局について</a>
+    <a href="#prescription">処方箋のご案内</a>
+    <a href="#hours">営業時間</a>
+    <a href="#faq">よくある質問</a>
+    <a href="#access">アクセス</a>
+    <a href="tel:0795760104" class="nav-cta">📞 0795-76-0104</a>
+  </div>
+
   <!-- ===== お知らせバー ===== -->
   <div class="notice-bar" id="top">
-    <span>🟢 処方箋受付中</span>
-    <span>🅿️ 駐車場あり（4台・無料）</span>
+    <span><span class="notice-dot"></span>処方箋受付中</span>
+    <span>🅿️ 無料駐車場あり（4台）</span>
     <span>📅 月〜土 営業</span>
-    <span>📠 FAXで事前送信OK</span>
+    <span>📠 FAX事前送信OK</span>
   </div>
 
   <!-- ===== ヒーロー ===== -->
   <div class="hero">
-    <div class="hero-badge">丹波市山南町 ・ 地域密着の調剤薬局</div>
-    <h1>山南町で40年以上、<br>地域に寄り添う薬局です</h1>
-    <p class="hero-sub">
-      和田店・谷川店の2店舗で、皆さまのお薬と健康をしっかりサポートします。<br>
-      気になることがあれば、いつでもお気軽にご相談ください。
-    </p>
-    <div class="hero-actions">
-      <a href="#prescription" class="btn-primary">📠 処方箋をFAXで送る</a>
-      <a href="#access" class="btn-outline">🗺️ アクセスを確認する</a>
+    <div class="hero-left">
+      <div class="hero-badge">丹波市山南町 ・ 地域密着の調剤薬局</div>
+      <h1>山南町で<em>40年以上</em>、<br>地域に寄り添う薬局</h1>
+      <p class="hero-sub">
+        和田店・谷川店の2店舗で、皆さまのお薬と健康を<br>
+        丁寧にサポートいたします。<br>
+        気になることはいつでもお気軽にご相談ください。
+      </p>
+      <div class="hero-actions">
+        <a href="#prescription" class="btn-gold ripple-btn">📠 処方箋をFAXで送る</a>
+        <a href="#access" class="btn-outline-white ripple-btn">🗺️ アクセスを見る</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="https://cdn.pakutaso.com/shared/img/thumb/PASONA_11_TP_V.jpg" alt="薬局イメージ" loading="eager">
     </div>
   </div>
 
-  <!-- ===== 特徴カード ===== -->
-  <section class="features" id="features">
+  <!-- ===== Wave ===== -->
+  <div class="wave-section">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 64" preserveAspectRatio="none" style="background:var(--forest)">
+      <path fill="#fafaf8" d="M0,32 C240,64 480,0 720,32 C960,64 1200,0 1440,32 L1440,64 L0,64 Z"/>
+    </svg>
+  </div>
+
+  <!-- ===== 数字で見るセクション ===== -->
+  <div class="stats-section" id="stats">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num"><span class="count-up" data-target="40">0</span><span class="stat-unit">年</span></div>
+        <div class="stat-label">創業からの歴史</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-num"><span class="count-up" data-target="2">0</span><span class="stat-unit">店舗</span></div>
+        <div class="stat-label">山南町に展開</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-num"><span class="count-up" data-target="6">0</span><span class="stat-unit">日間</span></div>
+        <div class="stat-label">月〜土 毎週営業</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-num"><span class="count-up" data-target="4">0</span><span class="stat-unit">台</span></div>
+        <div class="stat-label">無料駐車場</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Wave ===== -->
+  <div class="wave-section">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 64" preserveAspectRatio="none" style="background:var(--off-white)">
+      <path fill="var(--forest)" d="M0,32 C360,0 720,64 1080,32 C1260,16 1380,48 1440,32 L1440,0 L0,0 Z"/>
+    </svg>
+  </div>
+
+  <!-- ===== 当薬局について（ジグザグ） ===== -->
+  <section class="features-section" id="about">
     <div class="section-inner">
-      <span class="section-label">FEATURES</span>
-      <h2 class="section-title">まるいし薬局の3つの特徴</h2>
-      <p class="section-desc">地域のかかりつけ薬局として、安心・丁寧なサービスをご提供しています。</p>
-      <div class="card-grid">
-        <div class="card">
-          <span class="card-icon">🏘️</span>
-          <h3>地域密着の2店舗</h3>
-          <p>山南町和田・谷川の2店舗を構え、地域の皆さまの健康を長年にわたって支えています。地元に根ざした薬局として、地域全体を面でサポートします。</p>
+      <div class="section-head centered reveal">
+        <span class="section-en">About Us</span>
+        <h2 class="section-title">まるいし薬局の特徴</h2>
+        <p class="section-desc">地域のかかりつけ薬局として、安心・丁寧なサービスを提供しています。</p>
+        <span class="gold-line"></span>
+      </div>
+
+      <!-- 特徴1 -->
+      <div class="feature-row">
+        <div class="feature-visual reveal from-left">
+          <img src="https://cdn.pakutaso.com/shared/img/thumb/MAKIyoko15180202_TP_V.jpg" alt="地域密着">
+          <div class="feature-visual-overlay"></div>
         </div>
-        <div class="card">
-          <span class="card-icon">💬</span>
-          <h3>丁寧でわかりやすい説明</h3>
-          <p>お薬の飲み方・副作用・飲み合わせなどを、わかりやすい言葉でご説明します。ご不明な点はどんなことでも遠慮なくお申しつけください。</p>
+        <div class="feature-content reveal from-right">
+          <div class="feature-num">01</div>
+          <div class="feature-icon-box">🏘️</div>
+          <h3>山南町に2店舗。<br>地域を面でサポート</h3>
+          <p>和田店・谷川店の2店舗を構え、山南町全域の皆さまの健康を長年にわたってお支えしています。どちらの店舗でも変わらぬ品質のサービスをご提供し、地域全体を面でサポートする体制を整えています。</p>
         </div>
-        <div class="card">
-          <span class="card-icon">📠</span>
-          <h3>処方箋の事前受付</h3>
-          <p>FAXやネットで処方箋を事前送信いただくと、来局時のお待ち時間を短縮できます。お仕事や通院でお忙しい方もスムーズにお薬を受け取れます。</p>
+      </div>
+
+      <!-- 特徴2 -->
+      <div class="feature-row reverse">
+        <div class="feature-visual reveal from-right">
+          <img src="https://cdn.pakutaso.com/shared/img/thumb/PASONAZ160306060I9A1905_TP_V.jpg" alt="丁寧な説明">
+          <div class="feature-visual-overlay"></div>
+        </div>
+        <div class="feature-content reveal from-left">
+          <div class="feature-num">02</div>
+          <div class="feature-icon-box">💬</div>
+          <h3>わかりやすい言葉で、<br>丁寧にご説明</h3>
+          <p>お薬の飲み方・副作用・飲み合わせについて、専門用語を使わずわかりやすくご説明します。「こんなこと聞いていいの？」と遠慮せず、どんな小さな疑問もお気軽にご相談ください。</p>
+        </div>
+      </div>
+
+      <!-- 特徴3 -->
+      <div class="feature-row">
+        <div class="feature-visual reveal from-left">
+          <img src="https://cdn.pakutaso.com/shared/img/thumb/PASONAMAX2542_TP_V.jpg" alt="処方箋事前受付">
+          <div class="feature-visual-overlay"></div>
+        </div>
+        <div class="feature-content reveal from-right">
+          <div class="feature-num">03</div>
+          <div class="feature-icon-box">📠</div>
+          <h3>FAXで事前送信。<br>待ち時間を大幅短縮</h3>
+          <p>処方箋をFAXで事前にお送りいただくと、来局時のお待ち時間を大幅に短縮できます。お仕事や子育てでお忙しい方も、スムーズにお薬を受け取っていただける体制を整えています。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== ギャラリー ===== -->
-  <section class="gallery" id="gallery">
+  <!-- ===== Wave ===== -->
+  <div class="wave-section">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 64" preserveAspectRatio="none" style="background:var(--cream)">
+      <path fill="var(--off-white)" d="M0,32 C240,64 480,0 720,32 C960,64 1200,0 1440,32 L1440,0 L0,0 Z"/>
+    </svg>
+  </div>
+
+  <!-- ===== 薬剤師からのメッセージ ===== -->
+  <section class="message-section" id="message">
     <div class="section-inner">
-      <span class="section-label">GALLERY</span>
-      <h2 class="section-title">店舗のご紹介</h2>
-      <p class="section-desc">清潔で落ち着いた空間で、丁寧にお薬のご説明をいたします。</p>
-      <div class="gallery-grid">
-        <div>
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=800&q=80" alt="薬局外観" loading="lazy">
+      <div class="section-head reveal">
+        <span class="section-en">From Our Pharmacist</span>
+        <h2 class="section-title">薬剤師からのメッセージ</h2>
+        <span class="gold-line"></span>
+      </div>
+      <div class="message-card reveal">
+        <div class="message-photo">
+          <img src="https://cdn.pakutaso.com/shared/img/thumb/PASONA_11_TP_V.jpg" alt="薬剤師">
+          <div class="message-photo-overlay">
+            <div class="staff-name">薬剤師スタッフ一同</div>
+            <div class="staff-title">まるいし薬局 和田店</div>
           </div>
-          <p class="gallery-caption">店舗外観</p>
         </div>
-        <div>
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1576671081837-49000212a370?w=800&q=80" alt="薬局内部" loading="lazy">
+        <div class="message-body">
+          <div class="message-quote">"</div>
+          <p>
+            40年以上にわたり、この山南町で地域の皆さまとともに歩んできました。<br>
+            薬局は「薬をもらう場所」だけではありません。体の不調や薬への不安、日常の健康相談など、どんなことでもお話しいただける「身近な相談窓口」でありたいと思っています。
+          </p>
+          <p>
+            処方されたお薬のことはもちろん、市販薬との飲み合わせや、介護中のご家族の薬のことなど、ちょっとした疑問でもお気軽にお声がけください。皆さまの「安心」のために、誠心誠意お応えします。
+          </p>
+          <div class="message-sig">
+            <span>まるいし薬局</span> ／ 薬剤師スタッフ一同
           </div>
-          <p class="gallery-caption">調剤室・カウンター</p>
-        </div>
-        <div>
-          <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=800&q=80" alt="薬のご説明" loading="lazy">
-          </div>
-          <p class="gallery-caption">お薬のご相談</p>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ===== Wave ===== -->
+  <div class="wave-section">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 64" preserveAspectRatio="none" style="background:var(--off-white)">
+      <path fill="var(--cream)" d="M0,16 C360,64 1080,0 1440,48 L1440,0 L0,0 Z"/>
+    </svg>
+  </div>
 
   <!-- ===== 処方箋案内 ===== -->
-  <section class="prescription" id="prescription">
+  <section class="prescription-section" id="prescription">
     <div class="section-inner">
-      <span class="section-label">PRESCRIPTION</span>
-      <h2 class="section-title">処方箋のお取扱い</h2>
-      <p class="section-desc">来局前に処方箋をお送りいただくと、お待ち時間を大幅に短縮できます。</p>
-
-      <div class="rx-box">
-        <div class="rx-item">
-          <h3>📠 FAX番号（和田店）</h3>
-          <div class="rx-fax-number">0795-76-XXXX</div>
+      <div class="section-head centered reveal">
+        <span class="section-en">Prescription</span>
+        <h2 class="section-title">処方箋のお取扱い</h2>
+        <p class="section-desc">来局前に処方箋をFAXでお送りいただくと、お待ち時間を大幅に短縮できます。</p>
+        <span class="gold-line"></span>
+      </div>
+      <div class="rx-grid">
+        <div class="rx-card reveal">
+          <div class="rx-card-icon">📠</div>
+          <h3>FAX番号（和田店）</h3>
+          <div class="rx-fax">0795-76-XXXX</div>
           <p class="rx-note">※FAX番号は準備中です。店舗へお問い合わせください。</p>
-          <p style="margin-top:12px;">受付後、準備ができましたらご連絡いたします。<br>来局時はそのままお薬をお受け取りいただけます。</p>
+          <p style="margin-top:12px;">受付後、準備ができましたらご連絡いたします。来局時はそのままお薬をお受け取りいただけます。</p>
         </div>
-        <div class="rx-item">
-          <h3>📋 受付時間</h3>
+        <div class="rx-card reveal reveal-delay-1">
+          <div class="rx-card-icon">🕐</div>
+          <h3>FAX受付時間</h3>
           <p>
-            平日：8:30 〜 18:30<br>
-            土曜：8:30 〜 12:30<br>
+            平日：8:30 〜 18:00（閉店30分前まで）<br>
+            土曜：8:30 〜 12:00<br>
             <br>
-            ※受付締め切り30分前までにお送りください。
+            ※受け取り締め切り30分前までにお送りください。
           </p>
         </div>
-        <div class="rx-item">
-          <h3>📝 ご来局の流れ</h3>
+        <div class="rx-card reveal reveal-delay-2">
+          <div class="rx-card-icon">📋</div>
+          <h3>ご来局の流れ</h3>
           <ul>
-            <li>処方箋をFAXで送信</li>
-            <li>薬局から準備完了の連絡</li>
+            <li>処方箋をFAXで事前送信</li>
+            <li>薬局から準備完了のご連絡</li>
             <li>ご都合のよい時間に来局</li>
             <li>お薬の受け取り・説明</li>
           </ul>
@@ -753,162 +1335,294 @@
     </div>
   </section>
 
+  <!-- ===== Wave ===== -->
+  <div class="wave-section">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 72" preserveAspectRatio="none" style="background:#fff">
+      <path fill="var(--off-white)" d="M0,36 C480,72 960,0 1440,36 L1440,0 L0,0 Z"/>
+    </svg>
+  </div>
+
   <!-- ===== 営業時間 ===== -->
-  <section class="hours" id="hours">
+  <section class="hours-section" id="hours">
     <div class="section-inner">
-      <span class="section-label">HOURS</span>
-      <h2 class="section-title">営業時間</h2>
-      <p class="section-desc">和田店の営業時間です。</p>
-
-      <table class="hours-table">
-        <thead>
-          <tr>
-            <th>曜日</th>
-            <th>午前（8:30〜12:30）</th>
-            <th>午後（13:00〜18:30）</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>月曜日</td>
-            <td><span class="tag-open">受付中</span></td>
-            <td><span class="tag-open">受付中</span></td>
-          </tr>
-          <tr>
-            <td>火曜日</td>
-            <td><span class="tag-open">受付中</span></td>
-            <td><span class="tag-open">受付中</span></td>
-          </tr>
-          <tr>
-            <td>水曜日</td>
-            <td><span class="tag-open">受付中</span></td>
-            <td><span class="tag-open">受付中</span></td>
-          </tr>
-          <tr>
-            <td>木曜日</td>
-            <td><span class="tag-open">受付中</span></td>
-            <td><span class="tag-open">受付中</span></td>
-          </tr>
-          <tr>
-            <td>金曜日</td>
-            <td><span class="tag-open">受付中</span></td>
-            <td><span class="tag-open">受付中</span></td>
-          </tr>
-          <tr>
-            <td>土曜日</td>
-            <td><span class="tag-open">受付中</span></td>
-            <td><span class="tag-closed">休業</span></td>
-          </tr>
-          <tr>
-            <td>日曜日・祝日</td>
-            <td><span class="tag-closed">定休日</span></td>
-            <td><span class="tag-closed">定休日</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p class="hours-note">
-        ※ 土曜日の午後・日曜日・祝日は定休日です。<br>
-        ※ 年末年始・お盆期間中は臨時休業となる場合があります。詳細はお電話にてご確認ください。
-      </p>
+      <div class="section-head reveal">
+        <span class="section-en">Business Hours</span>
+        <h2 class="section-title">営業時間（和田店）</h2>
+        <span class="gold-line"></span>
+      </div>
+      <div class="hours-layout">
+        <div class="reveal">
+          <div class="hours-table-wrap">
+            <table class="hours-table">
+              <thead>
+                <tr>
+                  <th>曜日</th>
+                  <th>午前（8:30〜12:30）</th>
+                  <th>午後（13:00〜18:30）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>月曜日</td>
+                  <td><span class="tag-open">受付中</span></td>
+                  <td><span class="tag-open">受付中</span></td>
+                </tr>
+                <tr>
+                  <td>火曜日</td>
+                  <td><span class="tag-open">受付中</span></td>
+                  <td><span class="tag-open">受付中</span></td>
+                </tr>
+                <tr>
+                  <td>水曜日</td>
+                  <td><span class="tag-open">受付中</span></td>
+                  <td><span class="tag-open">受付中</span></td>
+                </tr>
+                <tr>
+                  <td>木曜日</td>
+                  <td><span class="tag-open">受付中</span></td>
+                  <td><span class="tag-open">受付中</span></td>
+                </tr>
+                <tr>
+                  <td>金曜日</td>
+                  <td><span class="tag-open">受付中</span></td>
+                  <td><span class="tag-open">受付中</span></td>
+                </tr>
+                <tr>
+                  <td>土曜日</td>
+                  <td><span class="tag-open">受付中</span></td>
+                  <td><span class="tag-closed">休業</span></td>
+                </tr>
+                <tr>
+                  <td>日曜・祝日</td>
+                  <td><span class="tag-closed">定休日</span></td>
+                  <td><span class="tag-closed">定休日</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="hours-note-bar">
+            ※ 土曜日の午後・日曜日・祝日は定休日です。<br>
+            ※ 年末年始・お盆期間は臨時休業の場合があります。詳細はお電話にてご確認ください。
+          </div>
+        </div>
+        <div class="hours-info-cards reveal reveal-delay-1">
+          <div class="hours-info-card">
+            <span class="hours-info-icon">📍</span>
+            <div>
+              <h4>住所</h4>
+              <p>〒669-3157<br>兵庫県丹波市山南町和田282</p>
+            </div>
+          </div>
+          <div class="hours-info-card">
+            <span class="hours-info-icon">📞</span>
+            <div>
+              <h4>お電話</h4>
+              <p><a href="tel:0795760104" style="color:var(--forest);font-weight:700;">0795-76-0104</a><br>受付時間中、お気軽にどうぞ</p>
+            </div>
+          </div>
+          <div class="hours-info-card">
+            <span class="hours-info-icon">🚌</span>
+            <div>
+              <h4>バスでお越しの方</h4>
+              <p>「和田上町」バス停すぐ前</p>
+            </div>
+          </div>
+          <div class="hours-info-card">
+            <span class="hours-info-icon">🅿️</span>
+            <div>
+              <h4>お車でのご来局</h4>
+              <p>無料駐車場あり（4台）</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ===== アクセス ===== -->
-  <section class="access" id="access">
-    <div class="section-inner">
-      <span class="section-label">ACCESS</span>
-      <h2 class="section-title">アクセス（和田店）</h2>
-      <p class="section-desc">お車でも路線バスでもお越しいただけます。</p>
+  <!-- ===== Wave ===== -->
+  <div class="wave-section">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 64" preserveAspectRatio="none" style="background:var(--off-white)">
+      <path fill="#fff" d="M0,48 C360,0 1080,64 1440,16 L1440,0 L0,0 Z"/>
+    </svg>
+  </div>
 
+  <!-- ===== FAQ ===== -->
+  <section class="faq-section" id="faq">
+    <div class="section-inner">
+      <div class="section-head centered reveal">
+        <span class="section-en">FAQ</span>
+        <h2 class="section-title">よくある質問</h2>
+        <span class="gold-line"></span>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-icon">Q</span>
+            <span class="faq-q-text">処方箋を持たずに相談だけすることはできますか？</span>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">もちろんです。市販薬の選び方、健康相談、お薬に関する疑問など、処方箋がなくてもお気軽にご相談ください。薬剤師がわかりやすくお答えします。</div>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-icon">Q</span>
+            <span class="faq-q-text">複数の病院の処方箋をまとめて出すことはできますか？</span>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">はい、複数の医療機関からの処方箋をまとめてお持ちいただけます。服用中のお薬を一元管理することで、飲み合わせの確認なども一緒に行うことができます。</div>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-icon">Q</span>
+            <span class="faq-q-text">お薬手帳は必要ですか？</span>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">お薬手帳をお持ちいただくと、飲み合わせの確認や過去の服薬歴の管理に役立ちます。お持ちでない方には新規に作成もできますので、お気軽にお申し出ください。</div>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-3">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-icon">Q</span>
+            <span class="faq-q-text">薬の在庫がない場合はどうなりますか？</span>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">一部のお薬は取り寄せが必要な場合があります。その際は翌日以降のお渡しとなることがありますが、事前にFAXでお送りいただくと在庫確認が迅速にでき、スムーズにご対応できます。</div>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-4">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-icon">Q</span>
+            <span class="faq-q-text">ジェネリック医薬品への変更はできますか？</span>
+            <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">はい、処方箋の内容に応じてジェネリック医薬品への変更が可能です。ご希望の場合はスタッフにお申し出ください。薬代の節約についても丁寧にご説明いたします。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Wave ===== -->
+  <div class="wave-section">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 64" preserveAspectRatio="none" style="background:#fff">
+      <path fill="var(--off-white)" d="M0,16 C240,64 720,0 1440,40 L1440,0 L0,0 Z"/>
+    </svg>
+  </div>
+
+  <!-- ===== アクセス ===== -->
+  <section class="access-section" id="access">
+    <div class="section-inner">
+      <div class="section-head centered reveal">
+        <span class="section-en">Access</span>
+        <h2 class="section-title">アクセス（和田店）</h2>
+        <p class="section-desc">お車でも路線バスでもお越しいただけます。</p>
+        <span class="gold-line"></span>
+      </div>
       <div class="access-grid">
-        <div class="access-info">
+        <div class="access-info reveal from-left">
           <div class="access-item">
-            <span class="access-icon">📍</span>
+            <div class="access-icon-box">📍</div>
             <div>
               <h4>住所</h4>
               <p>〒669-3157<br>兵庫県丹波市山南町和田282</p>
             </div>
           </div>
           <div class="access-item">
-            <span class="access-icon">📞</span>
+            <div class="access-icon-box">📞</div>
             <div>
               <h4>電話番号</h4>
               <p><a href="tel:0795760104">0795-76-0104</a></p>
             </div>
           </div>
           <div class="access-item">
-            <span class="access-icon">🚌</span>
+            <div class="access-icon-box">🚌</div>
             <div>
               <h4>バスをご利用の方</h4>
-              <p>「和田上町」バス停 前</p>
+              <p>「和田上町」バス停 すぐ前</p>
             </div>
           </div>
           <div class="access-item">
-            <span class="access-icon">🅿️</span>
+            <div class="access-icon-box">🅿️</div>
             <div>
               <h4>お車でのご来局</h4>
-              <p>駐車場あり（無料・4台）</p>
+              <p>無料駐車場あり（4台）<br>店舗正面・広々とした駐車スペース</p>
             </div>
           </div>
           <div class="access-item">
-            <span class="access-icon">🕐</span>
+            <div class="access-icon-box">🕐</div>
             <div>
               <h4>営業時間</h4>
               <p>平日 8:30〜18:30 ／ 土曜 8:30〜12:30<br>日曜・祝日 定休</p>
             </div>
           </div>
         </div>
-
-        <div class="access-map">
-          <div class="map-placeholder">
-            <div class="map-icon">🗺️</div>
-            <p>〒669-3157<br>兵庫県丹波市山南町和田282</p>
-            <a href="https://maps.google.com/maps?q=兵庫県丹波市山南町和田282" target="_blank" rel="noopener">
-              Google マップで開く
-            </a>
-          </div>
+        <div class="access-map-wrap reveal from-right">
+          <iframe
+            src="https://maps.google.com/maps?q=丹波市山南町和田282&output=embed"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="まるいし薬局 和田店 地図">
+          </iframe>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== 2店舗紹介 ===== -->
-  <section class="shops">
+  <!-- ===== Wave ===== -->
+  <div class="wave-section">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 64" preserveAspectRatio="none" style="background:var(--forest)">
+      <path fill="#fff" d="M0,32 C480,64 960,0 1440,32 L1440,0 L0,0 Z"/>
+    </svg>
+  </div>
+
+  <!-- ===== 2店舗 ===== -->
+  <div class="shops-section" id="shops">
     <div class="section-inner" style="text-align:center;">
-      <span class="section-label" style="background:rgba(255,255,255,0.15); color:#fff;">OUR SHOPS</span>
-      <h2 class="section-title" style="color:#fff; margin-top:8px;">山南町に2店舗を展開</h2>
-      <p style="color:rgba(255,255,255,0.78); font-size:0.95rem;">お近くの店舗をご利用ください。</p>
-      <div class="shop-grid">
-        <div class="shop-card">
-          <h3>🏪 和田店 <span class="shop-current">このページ</span></h3>
-          <p>
-            〒669-3157<br>
-            丹波市山南町和田282<br>
-            📞 0795-76-0104<br><br>
-            平日 8:30〜18:30<br>
-            土曜 8:30〜12:30
-          </p>
-        </div>
-        <div class="shop-card">
-          <h3>🏪 谷川店</h3>
-          <p>
-            丹波市山南町谷川エリア<br>
-            （詳細はお電話にてご確認ください）<br><br>
-            ※谷川店の詳細情報は<br>
-            準備中です。
-          </p>
-        </div>
+      <span class="section-en" style="color:var(--gold-light);">Our Shops</span>
+      <h2 class="section-title reveal" style="color:#fff; margin-top:8px;">山南町に2店舗を展開</h2>
+      <p style="color:rgba(255,255,255,0.65); font-size:0.95rem; margin-top:10px;">お近くの店舗をご利用ください。</p>
+    </div>
+    <div class="shops-grid">
+      <div class="shop-card reveal">
+        <div class="shop-tag">このページ</div>
+        <h3>🏪 和田店</h3>
+        <p>
+          〒669-3157<br>
+          丹波市山南町和田282<br>
+          TEL：0795-76-0104<br><br>
+          平日 8:30〜18:30<br>
+          土曜 8:30〜12:30
+        </p>
+      </div>
+      <div class="shop-card reveal reveal-delay-1">
+        <h3>🏪 谷川店</h3>
+        <p>
+          丹波市山南町谷川エリア<br>
+          （詳細はお電話にてご確認ください）<br><br>
+          ※ 谷川店の詳細情報は準備中です。<br>
+          お電話でお問い合わせください。
+        </p>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- ===== フッター ===== -->
   <footer>
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <div class="logo-text">💊 まるいし薬局</div>
+          <div class="f-logo">
+            <div class="f-logo-mark">💊</div>
+            <span class="f-logo-name">MARUISHI PHARMACY</span>
+          </div>
           <p>
             有限会社まるいし薬局<br>
             〒669-3157 兵庫県丹波市山南町和田282<br>
@@ -917,20 +1631,21 @@
         </div>
         <div class="footer-links">
           <div class="footer-col">
-            <h4>メニュー</h4>
+            <h4>Menu</h4>
             <ul>
               <li><a href="#top">TOP</a></li>
-              <li><a href="#features">当薬局について</a></li>
+              <li><a href="#about">当薬局について</a></li>
               <li><a href="#prescription">処方箋のご案内</a></li>
               <li><a href="#hours">営業時間</a></li>
+              <li><a href="#faq">よくある質問</a></li>
               <li><a href="#access">アクセス</a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h4>店舗情報</h4>
+            <h4>Shops</h4>
             <ul>
               <li><a href="#access">和田店</a></li>
-              <li><a href="#top">谷川店（準備中）</a></li>
+              <li><a href="#shops">谷川店（準備中）</a></li>
             </ul>
           </div>
         </div>
@@ -939,16 +1654,103 @@
     </div>
   </footer>
 
-  <!-- ===== ハンバーガーメニュー JS ===== -->
+  <!-- ===== JavaScript ===== -->
   <script>
-    function toggleNav() {
-      const nav = document.getElementById('global-nav');
-      nav.classList.toggle('open');
+    // ===== ハンバーガーメニュー =====
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('active', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        hamburger.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ===== Intersection Observer（スクロールアニメーション） =====
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ===== カウントアップアニメーション =====
+    function animateCount(el, target, duration) {
+      const start = performance.now();
+      const update = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target);
+        if (progress < 1) requestAnimationFrame(update);
+        else el.textContent = target;
+      };
+      requestAnimationFrame(update);
     }
-    // ナビリンクをクリックしたらメニューを閉じる
-    document.querySelectorAll('#global-nav a').forEach(function(link) {
-      link.addEventListener('click', function() {
-        document.getElementById('global-nav').classList.remove('open');
+
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          animateCount(el, target, 1600);
+          countObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.count-up').forEach(el => countObserver.observe(el));
+
+    // ===== FAQ アコーディオン =====
+    function toggleFaq(questionEl) {
+      const item = questionEl.closest('.faq-item');
+      const isOpen = item.classList.toggle('open');
+      const answer = item.querySelector('.faq-a');
+      if (isOpen) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      } else {
+        answer.style.maxHeight = '0';
+      }
+    }
+
+    // ===== Ripple エフェクト =====
+    document.querySelectorAll('.ripple-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const circle = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        circle.classList.add('ripple-circle');
+        circle.style.cssText = `
+          width: ${size}px; height: ${size}px;
+          left: ${e.clientX - rect.left - size / 2}px;
+          top: ${e.clientY - rect.top - size / 2}px;
+        `;
+        this.appendChild(circle);
+        circle.addEventListener('animationend', () => circle.remove());
+      });
+    });
+
+    // ===== スクロールアンカー補正 =====
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
       });
     });
   </script>
