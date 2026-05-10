@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>くぼ薬局 | 丹波市氷上の調剤薬局</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif; color: #2c2c2c; line-height: 1.8; }
+
+    /* ヘッダー */
+    header {
+      background: #1a5276;
+      color: white;
+      padding: 0 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 68px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { font-size: 1.2rem; font-weight: bold; letter-spacing: 0.06em; display: flex; align-items: center; gap: 10px; }
+    .logo .icon { font-size: 1.5rem; }
+    nav a { color: #aed6f1; text-decoration: none; margin-left: 24px; font-size: 0.85rem; transition: color 0.2s; }
+    nav a:hover { color: white; }
+
+    /* お知らせバー */
+    .info-bar {
+      background: #d6eaf8;
+      border-bottom: 1px solid #aed6f1;
+      padding: 10px 48px;
+      font-size: 0.85rem;
+      color: #1a5276;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .info-bar span { display: flex; align-items: center; gap: 6px; }
+
+    /* ヒーロー */
+    .hero {
+      background: linear-gradient(135deg, #154360 0%, #1f618d 60%, #154360 100%);
+      color: white;
+      padding: 80px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '＋';
+      position: absolute;
+      right: 80px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 18rem;
+      color: rgba(255,255,255,0.04);
+      font-weight: bold;
+      line-height: 1;
+    }
+    .hero-inner { max-width: 640px; position: relative; z-index: 1; }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #aed6f1;
+      font-size: 0.78rem;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      letter-spacing: 0.08em;
+    }
+    .hero h1 { font-size: 2.4rem; font-weight: bold; line-height: 1.45; margin-bottom: 18px; }
+    .hero h1 span { color: #85c1e9; }
+    .hero p { color: #aed6f1; font-size: 0.95rem; margin-bottom: 36px; max-width: 480px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-white { background: white; color: #1a5276; padding: 13px 28px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: opacity 0.2s; }
+    .btn-white:hover { opacity: 0.88; }
+    .btn-ghost { background: transparent; color: white; padding: 13px 28px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.35); transition: border-color 0.2s; }
+    .btn-ghost:hover { border-color: white; }
+
+    /* セクション共通 */
+    section { padding: 72px 48px; }
+    .section-label { text-align: center; color: #2e86c1; font-size: 0.78rem; font-weight: bold; letter-spacing: 0.15em; margin-bottom: 10px; }
+    .section-title { text-align: center; font-size: 1.6rem; font-weight: bold; margin-bottom: 10px; }
+    .section-sub { text-align: center; color: #888; margin-bottom: 48px; font-size: 0.88rem; }
+    .container { max-width: 1000px; margin: 0 auto; }
+
+    /* 特徴 */
+    .features { background: #f4f9fd; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .feature-card {
+      background: white;
+      border-radius: 8px;
+      padding: 32px 22px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border-top: 3px solid #1f618d;
+      transition: transform 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-3px); }
+    .feature-card .icon { font-size: 2rem; margin-bottom: 14px; }
+    .feature-card h3 { font-size: 0.95rem; font-weight: bold; margin-bottom: 8px; color: #1a5276; }
+    .feature-card p { font-size: 0.82rem; color: #777; }
+
+    /* 処方箋受付 */
+    .rx { background: #154360; color: white; padding: 60px 48px; }
+    .rx-inner { max-width: 720px; margin: 0 auto; }
+    .rx h2 { font-size: 1.5rem; font-weight: bold; margin-bottom: 14px; text-align: center; }
+    .rx h2 span { color: #85c1e9; }
+    .rx p { color: #aed6f1; text-align: center; font-size: 0.9rem; margin-bottom: 32px; }
+    .rx-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .rx-step {
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .rx-step .num { font-size: 1.8rem; font-weight: bold; color: #85c1e9; margin-bottom: 6px; }
+    .rx-step p { color: #cde; font-size: 0.82rem; margin: 0; }
+
+    /* 対応診療科 */
+    .depts { background: white; }
+    .dept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
+    .dept-item {
+      background: #f4f9fd;
+      border-radius: 8px;
+      padding: 18px 12px;
+      text-align: center;
+      font-size: 0.88rem;
+      color: #1a5276;
+      font-weight: 500;
+    }
+    .dept-item .icon { font-size: 1.4rem; display: block; margin-bottom: 6px; }
+
+    /* 支払い */
+    .payment { background: #f4f9fd; }
+    .pay-grid { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .pay-badge {
+      background: white;
+      border: 1px solid #d5e8f5;
+      color: #1a5276;
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    /* 営業時間・アクセス */
+    .access { background: white; }
+    .access-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .hours-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .hours-table th { background: #1a5276; color: white; padding: 10px 14px; text-align: left; font-weight: normal; }
+    .hours-table td { padding: 10px 14px; border-bottom: 1px solid #eee; }
+    .hours-table tr:last-child td { border-bottom: none; }
+    .hours-table .open { color: #27ae60; font-weight: bold; }
+    .hours-table .closed { color: #aaa; }
+    .access-map iframe { width: 100%; height: 280px; border-radius: 8px; border: none; }
+    .access-info { margin-top: 16px; font-size: 0.85rem; color: #555; }
+    .access-info p { display: flex; gap: 8px; margin-bottom: 6px; }
+    .access-info span { color: #aaa; min-width: 48px; }
+
+    /* お問い合わせ */
+    .contact { background: #f4f9fd; }
+    .contact-box {
+      max-width: 520px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      padding: 48px 44px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+    .contact-box .phone-num { font-size: 2rem; font-weight: bold; color: #1a5276; margin: 16px 0 6px; letter-spacing: 0.04em; }
+    .contact-box .hours-note { color: #888; font-size: 0.82rem; margin-bottom: 24px; }
+    .rx-btn { display: inline-block; background: #1f618d; color: white; padding: 12px 32px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: bold; margin-top: 8px; transition: opacity 0.2s; }
+    .rx-btn:hover { opacity: 0.85; }
+
+    /* フッター */
+    footer { background: #0a1f2e; color: #5d8aa8; text-align: center; padding: 24px; font-size: 0.82rem; }
+
+    @media (max-width: 700px) {
+      header { padding: 0 20px; }
+      nav { display: none; }
+      .hero { padding: 56px 20px; }
+      .hero h1 { font-size: 1.8rem; }
+      .hero::after { display: none; }
+      section { padding: 56px 20px; }
+      .access-inner { grid-template-columns: 1fr; }
+      .info-bar { padding: 10px 20px; }
+      .rx { padding: 48px 20px; }
+      .contact-box { padding: 36px 24px; }
+    }
+  
+    @media (max-width: 768px) {
+      .section { padding: 52px 16px; }
+      .btn { padding: 12px 20px; font-size: 0.88rem; }
+      .hero-btns { gap: 10px; }
+      .gallery-sub-wrap { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .header-inner { padding: 0 14px; height: 60px; }
+      .logo-name { font-size: 1.05rem; }
+      .hero { height: 340px; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-main { grid-column: span 1; }
+      .gallery-main img { height: 200px; min-height: unset; }
+      .gallery-grid-sub img { height: 160px; }
+      .hours-table th, .hours-table td { padding: 10px 10px; font-size: 0.85rem; }
+      .map-wrap iframe { height: 240px; }
+      .feature-card { padding: 24px 18px; }
+      .footer-tel { font-size: 1.15rem; }
+      .notice-bar { padding: 10px 14px; }
+      .notice-item { font-size: 0.82rem; }
+      .section-title { font-size: 1.4rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="icon">💊</span>くぼ薬局</div>
+  <nav>
+    <a href="#features">特徴</a>
+    <a href="#rx">処方箋受付</a>
+    <a href="#access">営業時間・アクセス</a>
+    <a href="#contact">お問い合わせ</a>
+  </nav>
+</header>
+
+<!-- お知らせバー -->
+<div class="info-bar">
+  <span>📋 処方箋ネット受付・優先対応</span>
+  <span>💳 各種キャッシュレス対応</span>
+  <span>🅿️ 駐車場あり</span>
+  <span>🏠 在宅訪問サービス対応</span>
+</div>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="badge">📍 兵庫県丹波市氷上町成松 ・ 地域密着の調剤薬局</div>
+    <h1>地域の健康を<br><span>身近で支える</span><br>かかりつけ薬局</h1>
+    <p>丹波市氷上町成松にあるくぼ薬局です。処方箋ネット受付に対応し、お薬の準備が整ってからご来局いただけます。在宅訪問サービスにも対応しています。</p>
+    <div class="hero-btns">
+      <a href="#rx" class="btn-white">📋 処方箋をネット受付</a>
+      <a href="#access" class="btn-ghost">営業時間を確認する</a>
+    </div>
+  </div>
+</section>
+
+<!-- 特徴 -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-label">FEATURES</div>
+    <h2 class="section-title">くぼ薬局の特徴</h2>
+    <p class="section-sub">地域の皆様に選ばれ続ける理由</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon">🏘️</div>
+        <h3>地域密着</h3>
+        <p>丹波市氷上町で地域の皆様の健康をサポートする、信頼のかかりつけ薬局です。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">💬</div>
+        <h3>丁寧な服薬指導</h3>
+        <p>患者様の不安に寄り添い、お薬の飲み方・副作用・注意点をわかりやすく説明します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📋</div>
+        <h3>ネット受付優先対応</h3>
+        <p>処方箋ネット受付は優先対応。来局前に送るだけで待ち時間を大幅に短縮できます。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🏠</div>
+        <h3>在宅訪問サービス</h3>
+        <p>ご自宅へお薬をお届けし、服薬管理をサポートする在宅訪問業務に対応しています。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🪪</div>
+        <h3>マイナンバーカード対応</h3>
+        <p>オンライン資格確認・電子処方箋に対応。スムーズな受付が可能です。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">💳</div>
+        <h3>各種支払いに対応</h3>
+        <p>現金のほか、クレジットカード・交通系IC・QUICPay・iDなどに対応しています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 処方箋ネット受付 -->
+<section class="rx" id="rx">
+  <div class="rx-inner">
+    <div class="section-label" style="color:#85c1e9;">ONLINE PRESCRIPTION</div>
+    <h2>処方箋<span>ネット受付</span>が便利です</h2>
+    <p>ネット受付は優先対応。来局前にスマホから処方箋を送るだけでスムーズにお薬を受け取れます。</p>
+    <div class="rx-steps">
+      <div class="rx-step"><div class="num">①</div><p>処方箋をスマホで撮影</p></div>
+      <div class="rx-step"><div class="num">②</div><p>アプリまたはWebで送信</p></div>
+      <div class="rx-step"><div class="num">③</div><p>準備完了の連絡を受け取る</p></div>
+      <div class="rx-step"><div class="num">④</div><p>薬局でお薬を受け取る</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 対応診療科 -->
+<section class="depts">
+  <div class="container">
+    <div class="section-label">DEPARTMENTS</div>
+    <h2 class="section-title">対応している診療科</h2>
+    <p class="section-sub">各科の処方箋に対応しています</p>
+    <div class="dept-grid">
+      <div class="dept-item"><span class="icon">🫀</span>内科</div>
+      <div class="dept-item"><span class="icon">🦴</span>整形外科</div>
+      <div class="dept-item"><span class="icon">🧠</span>神経内科</div>
+      <div class="dept-item"><span class="icon">👶</span>小児科</div>
+      <div class="dept-item"><span class="icon">🧬</span>外科</div>
+      <div class="dept-item"><span class="icon">👁️</span>眼科</div>
+      <div class="dept-item"><span class="icon">👂</span>耳鼻科</div>
+      <div class="dept-item"><span class="icon">🦷</span>歯科</div>
+    </div>
+  </div>
+</section>
+
+<!-- 営業時間・アクセス -->
+<section class="access" id="access">
+  <div class="container">
+    <div class="section-label">ACCESS</div>
+    <h2 class="section-title">営業時間・アクセス</h2>
+    <p class="section-sub"></p>
+    <div class="access-inner">
+      <div>
+        <table class="hours-table">
+          <tr><th>曜日</th><th>営業時間</th></tr>
+          <tr><td>月・火・水・金</td><td class="open">9:00 〜 18:30</td></tr>
+          <tr><td>木</td><td class="open">9:00 〜 17:00</td></tr>
+          <tr><td>土</td><td class="open">9:00 〜 12:30</td></tr>
+          <tr><td>日・祝</td><td class="closed">休業</td></tr>
+        </table>
+        <div class="access-info" style="margin-top:20px;">
+          <p><span>住所</span>〒669-3831 兵庫県丹波市氷上町成松252</p>
+          <p><span>電話</span>0795-86-9111</p>
+          <p><span>アクセス</span>JR福知山線 石生駅より車で11分</p>
+        </div>
+      </div>
+      <div class="access-map">
+        <iframe src="https://maps.google.com/maps?q=兵庫県丹波市氷上町成松252&output=embed" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- お問い合わせ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-label">CONTACT</div>
+    <h2 class="section-title">お問い合わせ</h2>
+    <p class="section-sub">お薬のことはなんでもお気軽にご相談ください</p>
+    <div class="contact-box">
+      <p style="color:#888; font-size:0.85rem;">お電話でのお問い合わせ</p>
+      <div class="phone-num">📞 0795-86-9111</div>
+      <p class="hours-note">受付時間：月〜水・金 9:00〜18:30 ／ 木 9:00〜17:00 ／ 土 9:00〜12:30</p>
+      <hr style="border:none; border-top:1px solid #eee; margin:20px 0;">
+      <p style="color:#555; font-size:0.88rem; margin-bottom:12px;">処方箋はネットからも受付できます（優先対応）</p>
+      <a href="#" class="rx-btn">📋 処方箋をネット受付する</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 くぼ薬局 All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
